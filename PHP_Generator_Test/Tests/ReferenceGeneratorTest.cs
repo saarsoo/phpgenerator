@@ -18,9 +18,9 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerate()
         {
-            string php = this.generator.Generate(new Reference("foo/bar"));
+            string php = this.generator.Generate(new Reference(@"foo\bar"));
 
-            Assert.AreEqual("use foo/bar", php);
+            Assert.AreEqual(@"use foo\bar;", php);
         }
     }
 }

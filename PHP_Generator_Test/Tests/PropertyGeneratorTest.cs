@@ -18,7 +18,7 @@ namespace PHP_Generator_Test.Tests
             this.generator.InjectDependency(this.modifierGenerator = new ModifierGeneratorStub());
             this.generator.InjectDependency(this.statementGenerator = new StatementGeneratorStub());
 
-            this.modifierGenerator.Result = "private";
+            this.modifierGenerator.Results = new []{ "private" };
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateAssignment()
         {
-            this.statementGenerator.Result = "\"bar\"";
+            this.statementGenerator.Results = new []{ "\"bar\"" };
 
             string php = this.generator.Generate(new Property("foo", new Constant("bar")));
 

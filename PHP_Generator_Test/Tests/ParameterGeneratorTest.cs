@@ -29,7 +29,7 @@ namespace PHP_Generator_Test.Tests
 
         public void TestGenerateDefaultValue()
         {
-            this.statementGenerator.Result = "\"bar\"";
+            this.statementGenerator.Results = new []{ "\"bar\"" };
 
             string php = this.generator.Generate(new Parameter("foo", new Constant("bar")));
 

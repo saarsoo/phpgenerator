@@ -22,8 +22,8 @@ namespace PHP_Generator_Test
         [TestMethod]
         public void TestGenerate()
         {
-            this.identifierGenerator.Result = "$foo";
-            this.statementGenerator.Result = "\"bar\"";
+            this.identifierGenerator.Results = new []{ "$foo" };
+            this.statementGenerator.Results = new []{ "\"bar\"" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 

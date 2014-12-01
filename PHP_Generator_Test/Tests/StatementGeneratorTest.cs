@@ -26,7 +26,7 @@ namespace PHP_Generator_Test
         [TestMethod]
         public void TestGenerateConstant()
         {
-            this.constantGenerator.Result = "\"foo\"";
+            this.constantGenerator.Results = new []{ "\"foo\"" };
 
             string php = this.generator.Generate(new Constant("foo"));
 
@@ -36,7 +36,7 @@ namespace PHP_Generator_Test
         [TestMethod]
         public void TestGenerateIdentifier()
         {
-            this.identifierGenerator.Result = "$bar";
+            this.identifierGenerator.Results = new []{ "$bar" };
 
             string php = this.generator.Generate(new Identifier("bar"));
 
@@ -46,7 +46,7 @@ namespace PHP_Generator_Test
         [TestMethod]
         public void TestGenerateAssignment()
         {
-            this.assignmentGenerator.Result = "$foo = \"bar\"";
+            this.assignmentGenerator.Results = new []{ "$foo = \"bar\"" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 
@@ -58,7 +58,7 @@ namespace PHP_Generator_Test
         [TestMethod]
         public void TestGenerateBlock()
         {
-            this.blockGenerator.Result = "$foo = \"bar\";";
+            this.blockGenerator.Results = new []{ "$foo = \"bar\";" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
             var block = new Block(new []{ assignment });

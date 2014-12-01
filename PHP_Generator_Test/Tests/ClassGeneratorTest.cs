@@ -46,7 +46,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateProperty()
         {
-            this.propertyGenerator.Result = "private $bar;";
+            this.propertyGenerator.Results = new []{ "private $bar;" };
 
             string php = this.generator.Generate(new Class("Foo", new[] { new Property("bar") }));
 
@@ -56,7 +56,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateMethod()
         {
-            this.methodGenerator.Result = "private function bar(){}";
+            this.methodGenerator.Results = new []{ "private function bar(){}" };
 
             string php = this.generator.Generate(new Class("Foo", new[] { new Method("bar") }));
 

@@ -10,7 +10,7 @@ namespace PHP_Generator
     {
         public string Generate(Reference reference)
         {
-            return String.Format("use {0}", reference.Path);
+            return String.Format("use {0};", reference.Path);
         }
     }
 }

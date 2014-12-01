@@ -20,7 +20,7 @@ namespace PHP_Generator_Test.Tests
             this.generator.InjectDependency(this.parameterGenerator = new ParameterGeneratorStub());
             this.generator.InjectDependency(this.statementGenerator = new StatementGeneratorStub());
 
-            this.modifierGenerator.Result = "private";
+            this.modifierGenerator.Results = new []{ "private" };
         }
 
         [TestMethod]
@@ -34,7 +34,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateParameter()
         {
-            this.parameterGenerator.Result = "$bar";
+            this.parameterGenerator.Results = new []{ "$bar" };
 
             string php = this.generator.Generate(new Method("foo", new[] { new Parameter("bar") }));
 
@@ -44,7 +44,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateBody()
         {
-            this.statementGenerator.Result = "$foo=\"bar\"";
+            this.statementGenerator.Results = new []{ "$foo=\"bar\"" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 
@@ -56,7 +56,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateBlockBody()
         {
-            this.statementGenerator.Result = "$foo=\"bar\";";
+            this.statementGenerator.Results = new []{ "$foo=\"bar\";" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
             var block = new Block(new[] { assignment });

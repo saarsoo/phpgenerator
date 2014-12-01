@@ -8,10 +8,11 @@ namespace PHP_Generator_Test
 {
     abstract class GeneratorStub<T>
     {
-        public string Result { get; set; }
+        public string[] Results { get; set; }
+        private int index = 0;
 
         public string Generate(T obj){
-            return this.Result;
+            return this.Results[index++];
         }
     }
 }
