@@ -8,11 +8,19 @@ namespace PHP_Generator_Test.Tests
     public class MethodGeneratorTest
     {
         private MethodGenerator generator;
+        private ModifierGeneratorStub modifierGenerator;
+        private ParameterGeneratorStub parameterGenerator;
+        private StatementGeneratorStub statementGenerator;
 
         [TestInitialize]
         public void TestInitialize()
         {
             this.generator = new MethodGenerator();
+            this.generator.InjectDependency(this.modifierGenerator = new ModifierGeneratorStub());
+            this.generator.InjectDependency(this.parameterGenerator = new ParameterGeneratorStub());
+            this.generator.InjectDependency(this.statementGenerator = new StatementGeneratorStub());
+
+            this.modifierGenerator.Result = "private";
         }
 
         [TestMethod]
@@ -20,12 +28,42 @@ namespace PHP_Generator_Test.Tests
         {
             string php = this.generator.Generate(new Method("foo"));
 
-            Assert.AreEqual("function foo(){}", php);
+            Assert.AreEqual("private function foo(){}", php);
         }
 
         [TestMethod]
         public void TestGenerateParameter()
         {
+            this.parameterGenerator.Result = "$bar";
+
+            string php = this.generator.Generate(new Method("foo", new[] { new Parameter("bar") }));
+
+            Assert.AreEqual("private function foo($bar){}", php);
+        }
+
+        [TestMethod]
+        public void TestGenerateBody()
+        {
+            this.statementGenerator.Result = "$foo=\"bar\"";
+
+            var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
+
+            string php = this.generator.Generate(new Method("foo", assignment));
+
+            Assert.AreEqual("private function foo(){$foo=\"bar\";}", php);
+        }
+
+        [TestMethod]
+        public void TestGenerateBlockBody()
+        {
+            this.statementGenerator.Result = "$foo=\"bar\";";
+
+            var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
+            var block = new Block(new[] { assignment });
+
+            string php = this.generator.Generate(new Method("foo", block));
+
+            Assert.AreEqual("private function foo(){$foo=\"bar\";}", php);
         }
     }
 }

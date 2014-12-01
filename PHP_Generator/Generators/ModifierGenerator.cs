@@ -10,6 +10,16 @@ namespace PHP_Generator
     {
         public string Generate(Modifier modifier)
         {
+            switch(modifier)
+            {
+                case Modifier.Public:
+                    return "public";
+                case Modifier.Protected:
+                    return "protected";
+                case Modifier.Private:
+                    return "private";
+            }
+
             throw new NotImplementedException();
         }
     }

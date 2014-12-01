@@ -11,10 +11,24 @@ namespace PHP_Generator
         public readonly string Name;
         public readonly string Extends;
         public readonly string[] Implements = new string[] { };
+        public readonly Property[] Properties = new Property[] { };
+        public readonly Method[] Methods = new Method[] { };
 
         public Class(string name)
         {
             this.Name = name;
+        }
+
+        public Class(string name, Property[] properties)
+        {
+            this.Name = name;
+            this.Properties = properties;
+        }
+
+        public Class(string name, Method[] methods)
+        {
+            this.Name = name;
+            this.Methods = methods;
         }
 
         public Class(string name, string extends)

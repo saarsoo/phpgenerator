@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace PHP_Generator
 {
-    public class ClassGenerator : IClassGenerator
+    public class ClassGenerator : IClassGenerator, IDependency<IPropertyGenerator>, IDependency<IMethodGenerator>
     {
+        private IPropertyGenerator propertyGenerator;
+        private IMethodGenerator methodGenerator;
+
         public string Generate(Class @class)
         {
             string code = String.Format("class {0}", @class.Name);
 
-            if (@class.Extends != null)
+            if (!String.IsNullOrWhiteSpace(@class.Extends))
             {
                 code += String.Format(" extends {0}", @class.Extends);
             }
@@ -22,9 +25,31 @@ namespace PHP_Generator
                 code += String.Format(" implements {0}", String.Join(",", @class.Implements));
             }
 
-            code += "{}";
+            code += "{";
+
+            foreach (Property property in @class.Properties)
+            {
+                code += this.propertyGenerator.Generate(property);
+            }
+
+            foreach (Method method in @class.Methods)
+            {
+                code += this.methodGenerator.Generate(method);
+            }
+
+            code += "}";
 
             return code;
+        }
+
+        public void InjectDependency(IPropertyGenerator dependency)
+        {
+            this.propertyGenerator = dependency;
+        }
+
+        public void InjectDependency(IMethodGenerator dependency)
+        {
+            this.methodGenerator = dependency;
         }
     }
 }
