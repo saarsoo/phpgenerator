@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PHP_Generator
+﻿namespace PHP_Generator.Structures
 {
     public class Assignment : IStatement
     {
@@ -13,8 +7,8 @@ namespace PHP_Generator
 
         public Assignment(Identifier identifier, IStatement statement)
         {
-            this.Identifier = identifier;
-            this.Statement = statement;
+            Identifier = identifier;
+            Statement = statement;
         } 
     }
 }

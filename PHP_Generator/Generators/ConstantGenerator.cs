@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator
+namespace PHP_Generator.Generators
 {
     public class ConstantGenerator : IConstantGenerator
     {
         public string Generate(Constant constant)
         {
-            object value = constant.Value;
+            var value = constant.Value;
 
             if (value is bool)
             {
                 return value.ToString().ToLower();
             }
-            else if (value == null)
+            if (value == null)
             {
                 return "null";
             }
-            else if (value is string)
+            if (value is string)
             {
-                return "\"" + (value as string).Replace("\"", "\\\"") + "\"";
+                return "\"" + ((string) value).Replace("\"", "\\\"") + "\"";
             }
 
             return value.ToString();

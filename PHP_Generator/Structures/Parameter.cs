@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PHP_Generator
+﻿namespace PHP_Generator.Structures
 {
     public class Parameter
     {
@@ -13,13 +7,13 @@ namespace PHP_Generator
 
         public Parameter(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public Parameter(string name, IStatement statement)
         {
-            this.Name = name;
-            this.Statement = statement;
+            Name = name;
+            Statement = statement;
         }
     }
 }

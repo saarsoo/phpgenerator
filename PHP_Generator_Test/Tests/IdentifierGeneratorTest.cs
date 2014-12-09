@@ -1,24 +1,24 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PHP_Generator;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PHP_Generator.Generators;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator_Test
+namespace PHP_Generator_Test.Tests
 {
     [TestClass]
     public class IdentifierGeneratorTest
     {
-        private IdentifierGenerator generator;
+        private IdentifierGenerator _generator;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.generator = new IdentifierGenerator();
+            _generator = new IdentifierGenerator();
         }
 
         [TestMethod]
         public void TestGenerate()
         {
-            string php = this.generator.Generate(new Identifier("foo"));
+            var php = _generator.Generate(new Identifier("foo"));
 
             Assert.AreEqual("$foo", php);
         }

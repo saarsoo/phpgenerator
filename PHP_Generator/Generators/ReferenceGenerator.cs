@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator
+namespace PHP_Generator.Generators
 {
     public class ReferenceGenerator : IReferenceGenerator
     {

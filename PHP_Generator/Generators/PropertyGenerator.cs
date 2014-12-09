@@ -1,25 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator
+namespace PHP_Generator.Generators
 {
     public class PropertyGenerator : IPropertyGenerator, IDependency<IModifierGenerator>, IDependency<IStatementGenerator>
     {
-        private IModifierGenerator modifierGenerator;
-        private IStatementGenerator statementGenerator;
+        private IModifierGenerator _modifierGenerator;
+        private IStatementGenerator _statementGenerator;
 
         public string Generate(Property property)
         {
-            string modifier = this.modifierGenerator.Generate(property.Modifier);
+            var modifier = _modifierGenerator.Generate(property.Modifier);
 
-            string code = String.Format("{0} ${1}", modifier, property.Name);
+            var code = String.Format("{0} ${1}", modifier, property.Name);
 
             if (property.Statement != null)
             {
-                code += "=" + this.statementGenerator.Generate(property.Statement);
+                code += "=" + _statementGenerator.Generate(property.Statement);
             }
 
             return code + ";";
@@ -27,12 +25,12 @@ namespace PHP_Generator
 
         public void InjectDependency(IModifierGenerator dependency)
         {
-            this.modifierGenerator = dependency;
+            _modifierGenerator = dependency;
         }
 
         public void InjectDependency(IStatementGenerator dependency)
         {
-            this.statementGenerator = dependency;
+            _statementGenerator = dependency;
         }
     }
 }

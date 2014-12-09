@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator
+namespace PHP_Generator.Generators
 {
     public class ClassGenerator : IClassGenerator, IDependency<IPropertyGenerator>, IDependency<IMethodGenerator>
     {
-        private IPropertyGenerator propertyGenerator;
-        private IMethodGenerator methodGenerator;
+        private IPropertyGenerator _propertyGenerator;
+        private IMethodGenerator _methodGenerator;
 
         public string Generate(Class @class)
         {
-            string code = String.Format("class {0}", @class.Name);
+            var code = String.Format("class {0}", @class.Name);
 
             if (!String.IsNullOrWhiteSpace(@class.Extends))
             {
@@ -27,14 +25,14 @@ namespace PHP_Generator
 
             code += "{";
 
-            foreach (Property property in @class.Properties)
+            foreach (var property in @class.Properties)
             {
-                code += this.propertyGenerator.Generate(property);
+                code += _propertyGenerator.Generate(property);
             }
 
-            foreach (Method method in @class.Methods)
+            foreach (var method in @class.Methods)
             {
-                code += this.methodGenerator.Generate(method);
+                code += _methodGenerator.Generate(method);
             }
 
             code += "}";
@@ -44,12 +42,12 @@ namespace PHP_Generator
 
         public void InjectDependency(IPropertyGenerator dependency)
         {
-            this.propertyGenerator = dependency;
+            _propertyGenerator = dependency;
         }
 
         public void InjectDependency(IMethodGenerator dependency)
         {
-            this.methodGenerator = dependency;
+            _methodGenerator = dependency;
         }
     }
 }

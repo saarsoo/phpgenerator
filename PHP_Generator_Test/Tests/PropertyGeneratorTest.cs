@@ -1,30 +1,31 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PHP_Generator;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PHP_Generator.Generators;
+using PHP_Generator.Structures;
+using PHP_Generator_Test.Stubs;
 
 namespace PHP_Generator_Test.Tests
 {
     [TestClass]
     public class PropertyGeneratorTest
     {
-        private PropertyGenerator generator;
-        private ModifierGeneratorStub modifierGenerator;
-        private StatementGeneratorStub statementGenerator;
+        private PropertyGenerator _generator;
+        private ModifierGeneratorStub _modifierGenerator;
+        private StatementGeneratorStub _statementGenerator;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.generator = new PropertyGenerator();
-            this.generator.InjectDependency(this.modifierGenerator = new ModifierGeneratorStub());
-            this.generator.InjectDependency(this.statementGenerator = new StatementGeneratorStub());
+            _generator = new PropertyGenerator();
+            _generator.InjectDependency(_modifierGenerator = new ModifierGeneratorStub());
+            _generator.InjectDependency(_statementGenerator = new StatementGeneratorStub());
 
-            this.modifierGenerator.Results = new []{ "private" };
+            _modifierGenerator.Results = new []{ "private" };
         }
 
         [TestMethod]
         public void TestGenerate()
         {
-            string php = this.generator.Generate(new Property("foo"));
+            var php = _generator.Generate(new Property("foo"));
 
             Assert.AreEqual("private $foo;", php);
         }
@@ -32,9 +33,9 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateAssignment()
         {
-            this.statementGenerator.Results = new []{ "\"bar\"" };
+            _statementGenerator.Results = new []{ "\"bar\"" };
 
-            string php = this.generator.Generate(new Property("foo", new Constant("bar")));
+            var php = _generator.Generate(new Property("foo", new Constant("bar")));
 
             Assert.AreEqual("private $foo=\"bar\";", php);
         }

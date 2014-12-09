@@ -1,30 +1,33 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PHP_Generator;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PHP_Generator.Generators;
+using PHP_Generator.Structures;
+using PHP_Generator_Test.Stubs;
 
 namespace PHP_Generator_Test.Tests
 {
     [TestClass]
     public class FileGeneratorTest
     {
-        private FileGenerator generator;
-        private ReferenceGeneratorStub referenceGenerator;
-        private ClassGeneratorStub classGenerator;
+        private FileGenerator _generator;
+        private ReferenceGeneratorStub _referenceGenerator;
+        private ClassGeneratorStub _classGenerator;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.generator = new FileGenerator();
-            this.generator.InjectDependency(this.referenceGenerator = new ReferenceGeneratorStub());
-            this.generator.InjectDependency(this.classGenerator = new ClassGeneratorStub());
+            _generator = new FileGenerator();
+            _generator.InjectDependency(_referenceGenerator = new ReferenceGeneratorStub());
+            _generator.InjectDependency(_classGenerator = new ClassGeneratorStub());
         }
 
         [TestMethod]
         public void TestGenerate()
         {
-            string php = this.generator.Generate(new File());
+            var php = _generator.Generate(new File());
 
             Assert.AreEqual("<?php ", php);
         }
@@ -32,7 +35,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateNamespace()
         {
-            string php = this.generator.Generate(new File(@"foo\bar"));
+            var php = _generator.Generate(new File(@"foo\bar"));
 
             Assert.AreEqual(@"<?php namespace foo\bar;", php);
         }
@@ -40,9 +43,9 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateReferences()
         {
-            this.referenceGenerator.Results = new[] { @"use foo\bar;", @"use bar\foo;" };
+            _referenceGenerator.Results = new[] { @"use foo\bar;", @"use bar\foo;" };
 
-            string php = this.generator.Generate(new File(new[] { new Reference(@"foo\bar"), new Reference(@"bar\foo") }));
+            var php = _generator.Generate(new File(new[] { new Reference(@"foo\bar"), new Reference(@"bar\foo") }));
 
             Assert.AreEqual(@"<?php use foo\bar;use bar\foo;", php);
         }
@@ -50,9 +53,9 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateClass()
         {
-            this.classGenerator.Results = new []{ "class foo{}" };
+            _classGenerator.Results = new []{ "class foo{}" };
 
-            string php = this.generator.Generate(new File(new[] { new Class("Foo") }));
+            var php = _generator.Generate(new File(new[] { new Class("Foo") }));
 
             Assert.AreEqual("<?php class foo{}", php);
         }
@@ -60,7 +63,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateFullFile()
         {
-            this.generator = this.Resolve<FileGenerator>();
+            _generator = Resolve<FileGenerator>();
 
             var references = new[] { new Reference(@"first\reference"), new Reference(@"second\reference") };
             var assignment = new Assignment(new Identifier("localName"), new Constant("value"));
@@ -68,36 +71,47 @@ namespace PHP_Generator_Test.Tests
             var method = new Method("methodName", block);
             var @class = new Class("className", new[] { method });
 
-            File file = new File(@"name\space", references, new[] { @class });
+            var file = new File(@"name\space", references, new[] { @class });
 
-            string php = this.generator.Generate(file);
+            var php = _generator.Generate(file);
 
             Assert.AreEqual("<?php namespace name\\space;use first\\reference;use second\\reference;class className{private function methodName(){$localName=\"value\";}}", php);
         }
 
         private T Resolve<T>()
         {
-            return (T)this.Resolve(typeof(T));
+            if (_types == null)
+            {
+                var assembly = Assembly.Load(new AssemblyName("PHP_Generator"));
+                _types = assembly.GetTypes();
+            }
+
+            return (T)Resolve(typeof(T));
         }
 
         private object Resolve(Type type)
         {
-            string typeName = type.Name;
+            var typeName = type.Name;
 
             if (type.IsInterface)
             {
                 typeName = typeName.Substring(1);
             }
 
-            type = Type.GetType(String.Format("PHP_Generator.{0}, PHP_Generator", typeName));
+            type = _types.FirstOrDefault(t => t.Name == typeName);
 
-            if (instances.ContainsKey(type))
+            if (type == null)
             {
-                return instances[type];
+                throw new Exception(String.Format("Could not resolve type {0}", typeName));
             }
 
-            object instance = Activator.CreateInstance(type);
-            this.instances.Add(type, instance);
+            if (_instances.ContainsKey(type))
+            {
+                return _instances[type];
+            }
+
+            var instance = Activator.CreateInstance(type);
+            _instances.Add(type, instance);
 
             var methods = type.GetMethods().Where(m => m.Name == "InjectDependency");
 
@@ -105,12 +119,13 @@ namespace PHP_Generator_Test.Tests
             {
                 var parameter = method.GetParameters().First();
 
-                method.Invoke(instance, new[] { this.Resolve(parameter.ParameterType) });
+                method.Invoke(instance, new[] { Resolve(parameter.ParameterType) });
             }
 
             return instance;
         }
 
-        private Dictionary<Type, object> instances = new Dictionary<Type, object>();
+        private Dictionary<Type, object> _instances = new Dictionary<Type, object>();
+        private Type[] _types;
     }
 }

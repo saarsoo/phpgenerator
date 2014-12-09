@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PHP_Generator
+﻿namespace PHP_Generator.Structures
 {
     public class IfStatement : IStatement
     {
@@ -14,15 +8,15 @@ namespace PHP_Generator
 
         public IfStatement(IStatement condition, IStatement trueBody)
         {
-            this.Condition = condition;
-            this.TrueBody = trueBody;
+            Condition = condition;
+            TrueBody = trueBody;
         }
 
         public IfStatement(IStatement condition, IStatement trueBody, IStatement falseBody)
         {
-            this.Condition = condition;
-            this.TrueBody = trueBody;
-            this.FalseBody = falseBody;
+            Condition = condition;
+            TrueBody = trueBody;
+            FalseBody = falseBody;
         }
     }
 }

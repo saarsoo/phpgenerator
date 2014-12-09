@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator
+namespace PHP_Generator.Generators
 {
     public class BlockGenerator : IBlockGenerator, IDependency<IStatementGenerator>
     {
-        private IStatementGenerator statementGenerator;
+        private IStatementGenerator _statementGenerator;
 
         public string Generate(Block block)
         {
-            string code = "";
+            var code = "";
 
-            foreach (IStatement statement in block.Statements)
+            foreach (var statement in block.Statements)
             {
-                code += this.statementGenerator.Generate(statement);
+                code += _statementGenerator.Generate(statement);
                 code += ";";
             }
 
@@ -25,7 +22,7 @@ namespace PHP_Generator
 
         public void InjectDependency(IStatementGenerator dependency)
         {
-            this.statementGenerator = dependency;
+            _statementGenerator = dependency;
         }
     }
 }

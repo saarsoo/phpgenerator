@@ -1,26 +1,27 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PHP_Generator;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PHP_Generator.Generators;
+using PHP_Generator.Structures;
+using PHP_Generator_Test.Stubs;
 
 namespace PHP_Generator_Test.Tests
 {
     [TestClass]
     public class ParameterGeneratorTest
     {
-        private ParameterGenerator generator;
-        private StatementGeneratorStub statementGenerator;
+        private ParameterGenerator _generator;
+        private StatementGeneratorStub _statementGenerator;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.generator = new ParameterGenerator();
-            this.generator.InjectDependency(this.statementGenerator = new StatementGeneratorStub());
+            _generator = new ParameterGenerator();
+            _generator.InjectDependency(_statementGenerator = new StatementGeneratorStub());
         }
 
         [TestMethod]
         public void TestGenerate()
         {
-            string php = this.generator.Generate(new Parameter("foo"));
+            var php = _generator.Generate(new Parameter("foo"));
 
             Assert.AreEqual("$foo", php);
         }
@@ -29,9 +30,9 @@ namespace PHP_Generator_Test.Tests
 
         public void TestGenerateDefaultValue()
         {
-            this.statementGenerator.Results = new []{ "\"bar\"" };
+            _statementGenerator.Results = new []{ "\"bar\"" };
 
-            string php = this.generator.Generate(new Parameter("foo", new Constant("bar")));
+            var php = _generator.Generate(new Parameter("foo", new Constant("bar")));
 
             Assert.AreEqual("$foo=\"bar\"", php);
         }

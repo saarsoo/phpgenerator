@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PHP_Generator
+﻿namespace PHP_Generator.Structures
 {
     public class File
     {
         public readonly string Namespace;
-        public readonly Reference[] References = new Reference[] { };
-        public readonly Class[] Classes = new Class[] { };
+        public readonly Reference[] References = { };
+        public readonly Class[] Classes = { };
 
         public File()
         {
@@ -18,30 +12,30 @@ namespace PHP_Generator
 
         public File(string @namespace)
         {
-            this.Namespace = @namespace;
+            Namespace = @namespace;
         }
 
         public File(Class[] @classes)
         {
-            this.Classes = @classes;
+            Classes = @classes;
         }
 
         public File(Reference[] references)
         {
-            this.References = references;
+            References = references;
         }
 
         public File(string @namespace, Class[] @classes)
         {
-            this.Namespace = @namespace;
-            this.Classes = @classes;
+            Namespace = @namespace;
+            Classes = @classes;
         }
 
         public File(string @namespace, Reference[] references, Class[] @classes)
         {
-            this.Namespace = @namespace;
-            this.References = references;
-            this.Classes = @classes;
+            Namespace = @namespace;
+            References = references;
+            Classes = @classes;
         }
     }
 }

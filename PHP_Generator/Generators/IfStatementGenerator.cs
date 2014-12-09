@@ -1,29 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator
+namespace PHP_Generator.Generators
 {
     public class IfStatementGenerator : IIfStatementGenerator, IDependency<IStatementGenerator>
     {
-        private IStatementGenerator statementGenerator;
+        private IStatementGenerator _statementGenerator;
 
         public string Generate(IfStatement ifStatement)
         {
-            string condition = this.statementGenerator.Generate(ifStatement.Condition);
-            string trueBody = this.statementGenerator.Generate(ifStatement.TrueBody);
+            var condition = _statementGenerator.Generate(ifStatement.Condition);
+            var trueBody = _statementGenerator.Generate(ifStatement.TrueBody);
             if (!(ifStatement.TrueBody is Block))
             {
                 trueBody += ";";
             }
 
-            string code = String.Format("if({0}){{{1}}}", condition, trueBody);
+            var code = String.Format("if({0}){{{1}}}", condition, trueBody);
 
             if (ifStatement.FalseBody != null)
             {
-                string falseBody = this.statementGenerator.Generate(ifStatement.FalseBody);
+                var falseBody = _statementGenerator.Generate(ifStatement.FalseBody);
                 if (!(ifStatement.FalseBody is Block))
                 {
                     falseBody += ";";
@@ -37,7 +35,7 @@ namespace PHP_Generator
 
         public void InjectDependency(IStatementGenerator dependency)
         {
-            this.statementGenerator = dependency;
+            _statementGenerator = dependency;
         }
     }
 }

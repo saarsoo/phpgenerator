@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator
+namespace PHP_Generator.Generators
 {
     public class ParameterGenerator : IParameterGenerator, IDependency<IStatementGenerator>
     {
-        private IStatementGenerator statementGenerator;
+        private IStatementGenerator _statementGenerator;
 
         public string Generate(Parameter parameter)
         {
-            string code = String.Format("${0}", parameter.Name);
+            var code = String.Format("${0}", parameter.Name);
 
             if (parameter.Statement != null)
             {
-                code += "=" + this.statementGenerator.Generate(parameter.Statement);
+                code += "=" + _statementGenerator.Generate(parameter.Statement);
             }
 
             return code;
@@ -24,7 +22,7 @@ namespace PHP_Generator
 
         public void InjectDependency(IStatementGenerator dependency)
         {
-            this.statementGenerator = dependency;
+            _statementGenerator = dependency;
         }
     }
 }

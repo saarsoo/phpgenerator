@@ -1,34 +1,35 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PHP_Generator;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PHP_Generator.Generators;
+using PHP_Generator.Structures;
+using PHP_Generator_Test.Stubs;
 
-namespace PHP_Generator_Test
+namespace PHP_Generator_Test.Tests
 {
     [TestClass]
     public class StatementGeneratorTest
     {
-        private StatementGenerator generator;
-        private ConstantGeneratorStub constantGenerator;
-        private IdentifierGeneratorStub identifierGenerator;
-        private AssignmentGeneratorStub assignmentGenerator;
-        private BlockGeneratorStub blockGenerator;
+        private StatementGenerator _generator;
+        private ConstantGeneratorStub _constantGenerator;
+        private IdentifierGeneratorStub _identifierGenerator;
+        private AssignmentGeneratorStub _assignmentGenerator;
+        private BlockGeneratorStub _blockGenerator;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.generator = new StatementGenerator();
-            this.generator.InjectDependency(this.constantGenerator = new ConstantGeneratorStub());
-            this.generator.InjectDependency(this.identifierGenerator = new IdentifierGeneratorStub());
-            this.generator.InjectDependency(this.assignmentGenerator = new AssignmentGeneratorStub());
-            this.generator.InjectDependency(this.blockGenerator = new BlockGeneratorStub());
+            _generator = new StatementGenerator();
+            _generator.InjectDependency(_constantGenerator = new ConstantGeneratorStub());
+            _generator.InjectDependency(_identifierGenerator = new IdentifierGeneratorStub());
+            _generator.InjectDependency(_assignmentGenerator = new AssignmentGeneratorStub());
+            _generator.InjectDependency(_blockGenerator = new BlockGeneratorStub());
         }
 
         [TestMethod]
         public void TestGenerateConstant()
         {
-            this.constantGenerator.Results = new []{ "\"foo\"" };
+            _constantGenerator.Results = new []{ "\"foo\"" };
 
-            string php = this.generator.Generate(new Constant("foo"));
+            var php = _generator.Generate(new Constant("foo"));
 
             Assert.AreEqual("\"foo\"", php);
         }
@@ -36,9 +37,9 @@ namespace PHP_Generator_Test
         [TestMethod]
         public void TestGenerateIdentifier()
         {
-            this.identifierGenerator.Results = new []{ "$bar" };
+            _identifierGenerator.Results = new []{ "$bar" };
 
-            string php = this.generator.Generate(new Identifier("bar"));
+            var php = _generator.Generate(new Identifier("bar"));
 
             Assert.AreEqual("$bar", php);
         }
@@ -46,11 +47,11 @@ namespace PHP_Generator_Test
         [TestMethod]
         public void TestGenerateAssignment()
         {
-            this.assignmentGenerator.Results = new []{ "$foo = \"bar\"" };
+            _assignmentGenerator.Results = new []{ "$foo = \"bar\"" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 
-            string php = this.generator.Generate(assignment);
+            var php = _generator.Generate(assignment);
 
             Assert.AreEqual("$foo = \"bar\"", php);
         }
@@ -58,20 +59,20 @@ namespace PHP_Generator_Test
         [TestMethod]
         public void TestGenerateBlock()
         {
-            this.blockGenerator.Results = new []{ "$foo = \"bar\";" };
+            _blockGenerator.Results = new []{ "$foo = \"bar\";" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
             var block = new Block(new []{ assignment });
 
-            string php = this.generator.Generate(block);
+            var php = _generator.Generate(block);
 
             Assert.AreEqual("$foo = \"bar\";", php);
         }
 
         [TestMethod]
-        public void TestGeneratePHPStart()
+        public void TestGeneratePhpStart()
         {
-            string php = this.generator.Generate(new PHPStart());
+            var php = _generator.Generate(new PhpStart());
 
             Assert.AreEqual("<?php", php);
         }

@@ -1,24 +1,24 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PHP_Generator;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PHP_Generator.Generators;
+using PHP_Generator.Structures;
 
 namespace PHP_Generator_Test.Tests
 {
     [TestClass]
     public class ReferenceGeneratorTest
     {
-        private ReferenceGenerator generator;
+        private ReferenceGenerator _generator;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.generator = new ReferenceGenerator();
+            _generator = new ReferenceGenerator();
         }
 
         [TestMethod]
         public void TestGenerate()
         {
-            string php = this.generator.Generate(new Reference(@"foo\bar"));
+            var php = _generator.Generate(new Reference(@"foo\bar"));
 
             Assert.AreEqual(@"use foo\bar;", php);
         }

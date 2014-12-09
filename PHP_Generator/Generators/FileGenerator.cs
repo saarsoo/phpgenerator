@@ -1,33 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator
+namespace PHP_Generator.Generators
 {
     public class FileGenerator : IFileGenerator, IDependency<IReferenceGenerator>, IDependency<IClassGenerator>
     {
-        private IReferenceGenerator referenceGenerator;
-        private IClassGenerator classGenerator;
+        private IReferenceGenerator _referenceGenerator;
+        private IClassGenerator _classGenerator;
 
         public string Generate(File file)
         {
-            string code = "<?php ";
+            var code = "<?php ";
 
             if (!String.IsNullOrWhiteSpace(file.Namespace))
             {
                 code += "namespace " + file.Namespace + ";";
             }
 
-            foreach (Reference reference in file.References)
+            foreach (var reference in file.References)
             {
-                code += this.referenceGenerator.Generate(reference);
+                code += _referenceGenerator.Generate(reference);
             }
 
-            foreach (Class @class in file.Classes)
+            foreach (var @class in file.Classes)
             {
-                code += this.classGenerator.Generate(@class);
+                code += _classGenerator.Generate(@class);
             }
 
             return code;
@@ -35,12 +33,12 @@ namespace PHP_Generator
 
         public void InjectDependency(IReferenceGenerator dependency)
         {
-            this.referenceGenerator = dependency;
+            _referenceGenerator = dependency;
         }
 
         public void InjectDependency(IClassGenerator dependency)
         {
-            this.classGenerator = dependency;
+            _classGenerator = dependency;
         }
     }
 }

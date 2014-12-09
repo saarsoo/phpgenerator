@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator
+namespace PHP_Generator.Generators
 {
     public class StatementGenerator : IStatementGenerator,
         IDependency<IConstantGenerator>,
@@ -12,30 +10,30 @@ namespace PHP_Generator
         IDependency<IAssignmentGenerator>,
         IDependency<IBlockGenerator>
     {
-        private IConstantGenerator constantGenerator;
-        private IIdentifierGenerator identifierGenerator;
-        private IAssignmentGenerator assignmentGenerator;
-        private IBlockGenerator blockGenerator;
+        private IConstantGenerator _constantGenerator;
+        private IIdentifierGenerator _identifierGenerator;
+        private IAssignmentGenerator _assignmentGenerator;
+        private IBlockGenerator _blockGenerator;
 
         public string Generate(IStatement statement)
         {
             if (statement is Constant)
             {
-                return this.constantGenerator.Generate(statement as Constant);
+                return _constantGenerator.Generate(statement as Constant);
             }
-            else if (statement is Identifier)
+            if (statement is Identifier)
             {
-                return this.identifierGenerator.Generate(statement as Identifier);
+                return _identifierGenerator.Generate(statement as Identifier);
             }
-            else if (statement is Assignment)
+            if (statement is Assignment)
             {
-                return this.assignmentGenerator.Generate(statement as Assignment);
+                return _assignmentGenerator.Generate(statement as Assignment);
             }
-            else if (statement is Block)
+            if (statement is Block)
             {
-                return this.blockGenerator.Generate(statement as Block);
+                return _blockGenerator.Generate(statement as Block);
             }
-            else if (statement is PHPStart)
+            if (statement is PhpStart)
             {
                 return "<?php";
             }
@@ -45,22 +43,22 @@ namespace PHP_Generator
 
         public void InjectDependency(IConstantGenerator dependency)
         {
-            this.constantGenerator = dependency;
+            _constantGenerator = dependency;
         }
 
         public void InjectDependency(IIdentifierGenerator dependency)
         {
-            this.identifierGenerator = dependency;
+            _identifierGenerator = dependency;
         }
 
         public void InjectDependency(IAssignmentGenerator dependency)
         {
-            this.assignmentGenerator = dependency;
+            _assignmentGenerator = dependency;
         }
 
         public void InjectDependency(IBlockGenerator dependency)
         {
-            this.blockGenerator = dependency;
+            _blockGenerator = dependency;
         }
     }
 }

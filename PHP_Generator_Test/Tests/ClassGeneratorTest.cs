@@ -1,28 +1,29 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PHP_Generator;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PHP_Generator.Generators;
+using PHP_Generator.Structures;
+using PHP_Generator_Test.Stubs;
 
 namespace PHP_Generator_Test.Tests
 {
     [TestClass]
     public class ClassGeneratorTest
     {
-        private ClassGenerator generator;
-        private PropertyGeneratorStub propertyGenerator;
-        private MethodGeneratorStub methodGenerator;
+        private ClassGenerator _generator;
+        private PropertyGeneratorStub _propertyGenerator;
+        private MethodGeneratorStub _methodGenerator;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.generator = new ClassGenerator();
-            this.generator.InjectDependency(this.propertyGenerator = new PropertyGeneratorStub());
-            this.generator.InjectDependency(this.methodGenerator = new MethodGeneratorStub());
+            _generator = new ClassGenerator();
+            _generator.InjectDependency(_propertyGenerator = new PropertyGeneratorStub());
+            _generator.InjectDependency(_methodGenerator = new MethodGeneratorStub());
         }
 
         [TestMethod]
         public void TestGenerate()
         {
-            string php = this.generator.Generate(new Class("Foo"));
+            var php = _generator.Generate(new Class("Foo"));
 
             Assert.AreEqual("class Foo{}", php);
         }
@@ -30,7 +31,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateExtends()
         {
-            string php = this.generator.Generate(new Class("Foo", "Bar"));
+            var php = _generator.Generate(new Class("Foo", "Bar"));
 
             Assert.AreEqual("class Foo extends Bar{}", php);
         }
@@ -38,7 +39,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateImplements()
         {
-            string php = this.generator.Generate(new Class("Foo", new string[] { "Bar" }));
+            var php = _generator.Generate(new Class("Foo", new[] { "Bar" }));
 
             Assert.AreEqual("class Foo implements Bar{}", php);
         }
@@ -46,9 +47,9 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateProperty()
         {
-            this.propertyGenerator.Results = new []{ "private $bar;" };
+            _propertyGenerator.Results = new []{ "private $bar;" };
 
-            string php = this.generator.Generate(new Class("Foo", new[] { new Property("bar") }));
+            var php = _generator.Generate(new Class("Foo", new[] { new Property("bar") }));
 
             Assert.AreEqual("class Foo{private $bar;}", php);
         }
@@ -56,9 +57,9 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateMethod()
         {
-            this.methodGenerator.Results = new []{ "private function bar(){}" };
+            _methodGenerator.Results = new []{ "private function bar(){}" };
 
-            string php = this.generator.Generate(new Class("Foo", new[] { new Method("bar") }));
+            var php = _generator.Generate(new Class("Foo", new[] { new Method("bar") }));
 
             Assert.AreEqual("class Foo{private function bar(){}}", php);
         }

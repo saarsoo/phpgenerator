@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PHP_Generator
+﻿namespace PHP_Generator.Structures
 {
     public class Property
     {
@@ -14,26 +8,26 @@ namespace PHP_Generator
 
         public Property(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public Property(string name, IStatement statement)
         {
-            this.Name = name;
-            this.Statement = statement;
+            Name = name;
+            Statement = statement;
         }
 
         public Property(string name, Modifier modifier)
         {
-            this.Name = name;
-            this.Modifier = modifier;
+            Name = name;
+            Modifier = modifier;
         }
 
         public Property(string name, Modifier modifier, IStatement statement)
         {
-            this.Name = name;
-            this.Modifier = modifier;
-            this.Statement = statement;
+            Name = name;
+            Modifier = modifier;
+            Statement = statement;
         }
     }
 }

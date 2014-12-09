@@ -1,11 +1,7 @@
-﻿using PHP_Generator;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator_Test
+namespace PHP_Generator_Test.Stubs
 {
     class BlockGeneratorStub : GeneratorStub<Block>, IBlockGenerator
     {

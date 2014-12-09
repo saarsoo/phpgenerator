@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PHP_Generator
+﻿namespace PHP_Generator.Structures
 {
     public class Reference
     {
@@ -12,7 +6,7 @@ namespace PHP_Generator
 
         public Reference(string path)
         {
-            this.Path = path;
+            Path = path;
         }
     }
 }

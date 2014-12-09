@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PHP_Generator
+﻿namespace PHP_Generator.Structures
 {
     public class Method
     {
         public readonly string Name;
         public readonly Modifier Modifier = Modifier.Private;
-        public readonly Parameter[] Parameters = new Parameter[] { };
+        public readonly Parameter[] Parameters = { };
         public readonly IStatement Body;
 
         public Method(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public Method(string name, IStatement body)
         {
-            this.Name = name;
-            this.Body = body;
+            Name = name;
+            Body = body;
         }
 
         public Method(string name, Parameter[] parameters)
         {
-            this.Name = name;
-            this.Parameters = parameters;
+            Name = name;
+            Parameters = parameters;
         }
     }
 }

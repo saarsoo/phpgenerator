@@ -1,28 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PHP_Generator.Generators.Interfaces;
+using PHP_Generator.Structures;
 
-namespace PHP_Generator
+namespace PHP_Generator.Generators
 {
     public class MethodGenerator : IMethodGenerator, IDependency<IModifierGenerator>, IDependency<IParameterGenerator>, IDependency<IStatementGenerator>
     {
-        private IModifierGenerator modifierGenerator;
-        private IParameterGenerator parameterGenerator;
-        private IStatementGenerator statementGenerator;
+        private IModifierGenerator _modifierGenerator;
+        private IParameterGenerator _parameterGenerator;
+        private IStatementGenerator _statementGenerator;
 
         public string Generate(Method method)
         {
-            string modifier = this.modifierGenerator.Generate(method.Modifier);
+            var modifier = _modifierGenerator.Generate(method.Modifier);
 
-            string parameters = String.Join(",", method.Parameters.Select(p => this.parameterGenerator.Generate(p)));
+            var parameters = String.Join(",", method.Parameters.Select(p => _parameterGenerator.Generate(p)));
 
-            string body = "";
+            var body = "";
 
             if (method.Body != null)
             {
-                body = this.statementGenerator.Generate(method.Body);
+                body = _statementGenerator.Generate(method.Body);
                 if (!(method.Body is Block))
                 {
                     body += ";";
@@ -34,17 +33,17 @@ namespace PHP_Generator
 
         public void InjectDependency(IModifierGenerator dependency)
         {
-            this.modifierGenerator = dependency;
+            _modifierGenerator = dependency;
         }
 
         public void InjectDependency(IParameterGenerator dependency)
         {
-            this.parameterGenerator = dependency;
+            _parameterGenerator = dependency;
         }
 
         public void InjectDependency(IStatementGenerator dependency)
         {
-            this.statementGenerator = dependency;
+            _statementGenerator = dependency;
         }
     }
 }

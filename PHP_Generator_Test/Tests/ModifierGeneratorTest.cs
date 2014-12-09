@@ -1,24 +1,24 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PHP_Generator;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PHP_Generator.Generators;
+using PHP_Generator.Structures;
 
 namespace PHP_Generator_Test.Tests
 {
     [TestClass]
     public class ModifierGeneratorTest
     {
-        private ModifierGenerator generator;
+        private ModifierGenerator _generator;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.generator = new ModifierGenerator();
+            _generator = new ModifierGenerator();
         }
 
         [TestMethod]
         public void TestGeneratePublic()
         {
-            string php = this.generator.Generate(Modifier.Public);
+            var php = _generator.Generate(Modifier.Public);
 
             Assert.AreEqual("public", php);
         }
@@ -26,7 +26,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateProtected()
         {
-            string php = this.generator.Generate(Modifier.Protected);
+            var php = _generator.Generate(Modifier.Protected);
 
             Assert.AreEqual("protected", php);
         }
@@ -34,7 +34,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGeneratePrivate()
         {
-            string php = this.generator.Generate(Modifier.Private);
+            var php = _generator.Generate(Modifier.Private);
 
             Assert.AreEqual("private", php);
         }

@@ -1,30 +1,31 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PHP_Generator;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PHP_Generator.Generators;
+using PHP_Generator.Structures;
+using PHP_Generator_Test.Stubs;
 
 namespace PHP_Generator_Test.Tests
 {
     [TestClass]
     public class IfStatementGeneratorTest
     {
-        private IfStatementGenerator generator;
-        private StatementGeneratorStub statementGenerator;
+        private IfStatementGenerator _generator;
+        private StatementGeneratorStub _statementGenerator;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.generator = new IfStatementGenerator();
-            this.generator.InjectDependency(this.statementGenerator = new StatementGeneratorStub());
+            _generator = new IfStatementGenerator();
+            _generator.InjectDependency(_statementGenerator = new StatementGeneratorStub());
         }
 
         [TestMethod]
         public void TestGenerate()
         {
-            this.statementGenerator.Results = new string[] { "true", "$foo=\"bar\"" };
+            _statementGenerator.Results = new[] { "true", "$foo=\"bar\"" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 
-            string php = this.generator.Generate(new IfStatement(new Constant(true), assignment));
+            var php = _generator.Generate(new IfStatement(new Constant(true), assignment));
 
             Assert.AreEqual("if(true){$foo=\"bar\";}", php);
         }
@@ -32,12 +33,12 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateFalseBody()
         {
-            this.statementGenerator.Results = new string[] { "true", "$foo=\"bar\"", "$bar=\"foo\"" };
+            _statementGenerator.Results = new[] { "true", "$foo=\"bar\"", "$bar=\"foo\"" };
 
             var assignment1 = new Assignment(new Identifier("foo"), new Constant("bar"));
             var assignment2 = new Assignment(new Identifier("bar"), new Constant("foo"));
 
-            string php = this.generator.Generate(new IfStatement(new Constant(true), assignment1, assignment2));
+            var php = _generator.Generate(new IfStatement(new Constant(true), assignment1, assignment2));
 
             Assert.AreEqual("if(true){$foo=\"bar\";}else{$bar=\"foo\";}", php);
         }

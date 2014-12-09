@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PHP_Generator
+﻿namespace PHP_Generator
 {
-    public interface IDependency<D>
+    public interface IDependency<in T>
     {
-        void InjectDependency(D dependency);
+        void InjectDependency(T dependency);
     }
 }
