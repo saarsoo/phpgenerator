@@ -41,9 +41,11 @@
   <ItemGroup>
     <Compile Include="Generators\AccessorGenerator.cs" />
     <Compile Include="Generators\AccessorTypeGenerator.cs" />
+    <Compile Include="Generators\ArithmeticOperatorGenerator.cs" />
     <Compile Include="Generators\ArrayGenerator.cs" />
     <Compile Include="Generators\AssignmentGenerator.cs" />
-    <Compile Include="Generators\BinaryConditionGenerator.cs" />
+    <Compile Include="Generators\ArithmeticGenerator.cs" />
+    <Compile Include="Generators\ConditionGenerator.cs" />
     <Compile Include="Generators\BlockGenerator.cs" />
     <Compile Include="Generators\ClassGenerator.cs" />
     <Compile Include="Generators\ConditionalOperatorGenerator.cs" />
@@ -51,8 +53,10 @@
     <Compile Include="Generators\FileGenerator.cs" />
     <Compile Include="Generators\IAccessorGenerator.cs" />
     <Compile Include="Generators\IAccessorTypeGenerator.cs" />
+    <Compile Include="Generators\IArithmeticOperatorGenerator.cs" />
     <Compile Include="Generators\IArrayGenerator.cs" />
-    <Compile Include="Generators\IBinaryConditionGenerator.cs" />
+    <Compile Include="Generators\IArithmeticGenerator.cs" />
+    <Compile Include="Generators\IConditionGenerator.cs" />
     <Compile Include="Generators\IConditionalOperatorGenerator.cs" />
     <Compile Include="Generators\IfStatementGenerator.cs" />
     <Compile Include="Generators\IAssignmentGenerator.cs" />
@@ -82,9 +86,11 @@
     <Compile Include="IDependency.cs" />
     <Compile Include="Structures\Accessor.cs" />
     <Compile Include="Structures\AccessorType.cs" />
+    <Compile Include="Structures\ArithmeticOperator.cs" />
     <Compile Include="Structures\ArrayStatement.cs" />
     <Compile Include="Structures\Assignment.cs" />
-    <Compile Include="Structures\BinaryCondition.cs" />
+    <Compile Include="Structures\Arithmetic.cs" />
+    <Compile Include="Structures\Condition.cs" />
     <Compile Include="Structures\Block.cs" />
     <Compile Include="Structures\Class.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

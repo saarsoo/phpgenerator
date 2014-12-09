@@ -52,8 +52,11 @@
   <ItemGroup>
     <Compile Include="Stubs\AccessorGeneratorStub.cs" />
     <Compile Include="Stubs\AccessorTypeGeneratorStub.cs" />
+    <Compile Include="Stubs\ArithmeticOperatorGeneratorStub.cs" />
+    <Compile Include="Stubs\ArithmeticTypeGeneratorStub.cs" />
     <Compile Include="Stubs\ArrayGeneratorStub.cs" />
-    <Compile Include="Stubs\BinaryConditionStub.cs" />
+    <Compile Include="Stubs\ArithmeticGeneratorStub.cs" />
+    <Compile Include="Stubs\ConditionStub.cs" />
     <Compile Include="Stubs\ConditionalOperatorGeneratorStub.cs" />
     <Compile Include="Stubs\MemberGeneratorStub.cs" />
     <Compile Include="Stubs\MethodCallGeneratorStub.cs" />
@@ -64,8 +67,10 @@
     <Compile Include="Stubs\ReferenceGeneratorStub.cs" />
     <Compile Include="Tests\AccessorGeneratorTest.cs" />
     <Compile Include="Tests\AccessorTypeGeneratorTest.cs" />
+    <Compile Include="Tests\ArithmeticGeneratorTest.cs" />
+    <Compile Include="Tests\ArithmeticOperatorGeneratorTest.cs" />
     <Compile Include="Tests\ArrayGeneratorTest.cs" />
-    <Compile Include="Tests\BinaryConditionGeneratorTest.cs" />
+    <Compile Include="Tests\ConditionGeneratorTest.cs" />
     <Compile Include="Tests\ConditionalOperatorGeneratorTest.cs" />
     <Compile Include="Tests\MemberGeneratorTest.cs" />
     <Compile Include="Tests\AssignmentGeneratorTest.cs" />

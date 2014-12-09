@@ -7,12 +7,12 @@ using PHP_Generator.Structures;
 
 namespace PHP_Generator.Generators
 {
-    public class BinaryConditionGenerator : IBinaryConditionGenerator, IDependency<IStatementGenerator>, IDependency<IConditionalOperatorGenerator>
+    public class ConditionGenerator : IConditionGenerator, IDependency<IStatementGenerator>, IDependency<IConditionalOperatorGenerator>
     {
         private IConditionalOperatorGenerator _conditionalOperatorGenerator;
         private IStatementGenerator _statementGenerator;
 
-        public string Generate(BinaryCondition condition)
+        public string Generate(Condition condition)
         {
             var left = _statementGenerator.Generate(condition.LeftCondition);
             var @operator = _conditionalOperatorGenerator.Generate(condition.Operator);
