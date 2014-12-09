@@ -35,5 +35,13 @@ namespace PHP_Generator_Test.Tests
 
             Assert.AreEqual("$foo=\"bar\"", php);
         }
+
+        [TestMethod]
+        public void TestGenerateWithType()
+        {
+            var php = _generator.Generate(new Parameter("Foo", "bar"));
+
+            Assert.AreEqual("Foo $bar", php);
+        }
     }
 }

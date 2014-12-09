@@ -2,6 +2,7 @@
 {
     public class Parameter
     {
+        public readonly string Type;
         public readonly string Name;
         public readonly IStatement Statement;
 
@@ -14,6 +15,12 @@
         {
             Name = name;
             Statement = statement;
+        }
+
+        public Parameter(string type, string name)
+        {
+            Type = type;
+            Name = name;
         }
     }
 }

@@ -14,7 +14,15 @@ namespace PHP_Generator.Generators
 
         public string Generate(Parameter parameter)
         {
-            var code = String.Format("${0}", parameter.Name);
+            var code = "";
+
+            if (parameter.Type != null)
+            {
+                code += parameter.Type + " ";
+            }
+
+            code += String.Format("${0}", parameter.Name);
+
 
             if (parameter.Statement != null)
             {
