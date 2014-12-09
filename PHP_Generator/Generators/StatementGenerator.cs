@@ -1,5 +1,4 @@
 ﻿using System;
-using PHP_Generator.Generators.Interfaces;
 using PHP_Generator.Structures;
 
 namespace PHP_Generator.Generators

@@ -5,24 +5,17 @@
         public readonly string Name;
         public readonly string Extends;
         public readonly string[] Implements = { };
-        public readonly Property[] Properties = { };
-        public readonly Method[] Methods = { };
+        public readonly IMember[] Members = {};
 
         public Class(string name)
         {
             Name = name;
         }
 
-        public Class(string name, Property[] properties)
+        public Class(string name, IMember[] members)
         {
             Name = name;
-            Properties = properties;
-        }
-
-        public Class(string name, Method[] methods)
-        {
-            Name = name;
-            Methods = methods;
+            Members = members;
         }
 
         public Class(string name, string extends)

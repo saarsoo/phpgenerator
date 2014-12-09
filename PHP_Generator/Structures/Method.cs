@@ -1,6 +1,6 @@
 ﻿namespace PHP_Generator.Structures
 {
-    public class Method
+    public class Method : IMember
     {
         public readonly string Name;
         public readonly Modifier Modifier = Modifier.Private;

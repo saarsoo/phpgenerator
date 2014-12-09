@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Stubs\MemberGeneratorStub.cs" />
     <Compile Include="Stubs\MethodGeneratorStub.cs" />
     <Compile Include="Stubs\ModifierGeneratorStub.cs" />
     <Compile Include="Stubs\ParameterGeneratorStub.cs" />

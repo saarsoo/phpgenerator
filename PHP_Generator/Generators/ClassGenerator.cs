@@ -1,13 +1,11 @@
 ﻿using System;
-using PHP_Generator.Generators.Interfaces;
 using PHP_Generator.Structures;
 
 namespace PHP_Generator.Generators
 {
-    public class ClassGenerator : IClassGenerator, IDependency<IPropertyGenerator>, IDependency<IMethodGenerator>
+    public class ClassGenerator : IClassGenerator, IDependency<IMemberGenerator>
     {
-        private IPropertyGenerator _propertyGenerator;
-        private IMethodGenerator _methodGenerator;
+        private IMemberGenerator _memberGenerator;
 
         public string Generate(Class @class)
         {
@@ -25,14 +23,9 @@ namespace PHP_Generator.Generators
 
             code += "{";
 
-            foreach (var property in @class.Properties)
+            foreach (var member in @class.Members)
             {
-                code += _propertyGenerator.Generate(property);
-            }
-
-            foreach (var method in @class.Methods)
-            {
-                code += _methodGenerator.Generate(method);
+                code += _memberGenerator.Generate(member);
             }
 
             code += "}";
@@ -40,14 +33,9 @@ namespace PHP_Generator.Generators
             return code;
         }
 
-        public void InjectDependency(IPropertyGenerator dependency)
+        public void InjectDependency(IMemberGenerator dependency)
         {
-            _propertyGenerator = dependency;
-        }
-
-        public void InjectDependency(IMethodGenerator dependency)
-        {
-            _methodGenerator = dependency;
+            this._memberGenerator = dependency;
         }
     }
 }

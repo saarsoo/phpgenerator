@@ -53,7 +53,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateClass()
         {
-            _classGenerator.Results = new []{ "class foo{}" };
+            _classGenerator.Results = new[] { "class foo{}" };
 
             var php = _generator.Generate(new File(new[] { new Class("Foo") }));
 
@@ -69,24 +69,30 @@ namespace PHP_Generator_Test.Tests
             var assignment = new Assignment(new Identifier("localName"), new Constant("value"));
             var block = new Block(new[] { assignment });
             var method = new Method("methodName", block);
-            var @class = new Class("className", new[] { method });
+            var property = new Property("propertyName");
+            var @class = new Class("className", new IMember[] { property, method });
 
             var file = new File(@"name\space", references, new[] { @class });
 
             var php = _generator.Generate(file);
 
-            Assert.AreEqual("<?php namespace name\\space;use first\\reference;use second\\reference;class className{private function methodName(){$localName=\"value\";}}", php);
+            Assert.AreEqual("<?php namespace name\\space;use first\\reference;use second\\reference;class className{private $propertyName;private function methodName(){$localName=\"value\";}}", php);
         }
 
         private T Resolve<T>()
         {
             if (_types == null)
             {
-                var assembly = Assembly.Load(new AssemblyName("PHP_Generator"));
-                _types = assembly.GetTypes();
+                InitializeTypes<T>();
             }
 
             return (T)Resolve(typeof(T));
+        }
+
+        private void InitializeTypes<T>()
+        {
+            var assembly = Assembly.Load(new AssemblyName("PHP_Generator"));
+            _types = assembly.GetTypes();
         }
 
         private object Resolve(Type type)
