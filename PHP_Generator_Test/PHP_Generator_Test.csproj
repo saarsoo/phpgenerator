@@ -50,6 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Stubs\AccessorGeneratorStub.cs" />
+    <Compile Include="Stubs\AccessorTypeGeneratorStub.cs" />
     <Compile Include="Stubs\ArrayGeneratorStub.cs" />
     <Compile Include="Stubs\BinaryConditionStub.cs" />
     <Compile Include="Stubs\ConditionalOperatorGeneratorStub.cs" />
@@ -59,6 +61,8 @@
     <Compile Include="Stubs\ParameterGeneratorStub.cs" />
     <Compile Include="Stubs\PropertyGeneratorStub.cs" />
     <Compile Include="Stubs\ReferenceGeneratorStub.cs" />
+    <Compile Include="Tests\AccessorGeneratorTest.cs" />
+    <Compile Include="Tests\AccessorTypeGeneratorTest.cs" />
     <Compile Include="Tests\ArrayGeneratorTest.cs" />
     <Compile Include="Tests\BinaryConditionGeneratorTest.cs" />
     <Compile Include="Tests\ConditionalOperatorGeneratorTest.cs" />

@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generators\AccessorGenerator.cs" />
+    <Compile Include="Generators\AccessorTypeGenerator.cs" />
     <Compile Include="Generators\ArrayGenerator.cs" />
     <Compile Include="Generators\AssignmentGenerator.cs" />
     <Compile Include="Generators\BinaryConditionGenerator.cs" />
@@ -47,6 +49,8 @@
     <Compile Include="Generators\ConditionalOperatorGenerator.cs" />
     <Compile Include="Generators\ConstantGenerator.cs" />
     <Compile Include="Generators\FileGenerator.cs" />
+    <Compile Include="Generators\IAccessorGenerator.cs" />
+    <Compile Include="Generators\IAccessorTypeGenerator.cs" />
     <Compile Include="Generators\IArrayGenerator.cs" />
     <Compile Include="Generators\IBinaryConditionGenerator.cs" />
     <Compile Include="Generators\IConditionalOperatorGenerator.cs" />
@@ -74,6 +78,8 @@
     <Compile Include="Generators\ReferenceGenerator.cs" />
     <Compile Include="Generators\StatementGenerator.cs" />
     <Compile Include="IDependency.cs" />
+    <Compile Include="Structures\Accessor.cs" />
+    <Compile Include="Structures\AccessorType.cs" />
     <Compile Include="Structures\ArrayStatement.cs" />
     <Compile Include="Structures\Assignment.cs" />
     <Compile Include="Structures\BinaryCondition.cs" />

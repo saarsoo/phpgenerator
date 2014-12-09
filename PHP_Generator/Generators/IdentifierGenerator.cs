@@ -6,7 +6,16 @@ namespace PHP_Generator.Generators
     {
         public string Generate(Identifier identifier)
         {
-            return "$" + identifier.Name;
+            var code = "";
+
+            if (!identifier.Accessed)
+            {
+                code += "$";
+            }
+
+            code += identifier.Name;
+
+            return code;
         }
     }
 }
