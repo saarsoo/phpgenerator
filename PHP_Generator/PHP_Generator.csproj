@@ -64,6 +64,7 @@
     <Compile Include="Generators\IIdentifierGenerator.cs" />
     <Compile Include="Generators\IIfStatementGenerator.cs" />
     <Compile Include="Generators\IMemberGenerator.cs" />
+    <Compile Include="Generators\IMethodCallGenerator.cs" />
     <Compile Include="Generators\IMethodGenerator.cs" />
     <Compile Include="Generators\IModifierGenerator.cs" />
     <Compile Include="Generators\IParameterGenerator.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Generators\IReferenceGenerator.cs" />
     <Compile Include="Generators\IStatementGenerator.cs" />
     <Compile Include="Generators\MemberGenerator.cs" />
+    <Compile Include="Generators\MethodCallGenerator.cs" />
     <Compile Include="Generators\MethodGenerator.cs" />
     <Compile Include="Generators\ModifierGenerator.cs" />
     <Compile Include="Generators\ParameterGenerator.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Structures\IMember.cs" />
     <Compile Include="Structures\IStatement.cs" />
     <Compile Include="Structures\Method.cs" />
+    <Compile Include="Structures\MethodCall.cs" />
     <Compile Include="Structures\Modifier.cs" />
     <Compile Include="Structures\Namespace.cs" />
     <Compile Include="Structures\Parameter.cs" />

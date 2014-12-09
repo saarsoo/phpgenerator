@@ -56,6 +56,7 @@
     <Compile Include="Stubs\BinaryConditionStub.cs" />
     <Compile Include="Stubs\ConditionalOperatorGeneratorStub.cs" />
     <Compile Include="Stubs\MemberGeneratorStub.cs" />
+    <Compile Include="Stubs\MethodCallGeneratorStub.cs" />
     <Compile Include="Stubs\MethodGeneratorStub.cs" />
     <Compile Include="Stubs\ModifierGeneratorStub.cs" />
     <Compile Include="Stubs\ParameterGeneratorStub.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Tests\IdentifierGeneratorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\IfStatementGeneratorTest.cs" />
+    <Compile Include="Tests\MethodCallGeneratorTest.cs" />
     <Compile Include="Tests\MethodGeneratorTest.cs" />
     <Compile Include="Tests\ModifierGeneratorTest.cs" />
     <Compile Include="Tests\ParameterGeneratorTest.cs" />
