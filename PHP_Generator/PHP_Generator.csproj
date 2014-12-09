@@ -41,11 +41,15 @@
   <ItemGroup>
     <Compile Include="Generators\ArrayGenerator.cs" />
     <Compile Include="Generators\AssignmentGenerator.cs" />
+    <Compile Include="Generators\BinaryConditionGenerator.cs" />
     <Compile Include="Generators\BlockGenerator.cs" />
     <Compile Include="Generators\ClassGenerator.cs" />
+    <Compile Include="Generators\ConditionalOperatorGenerator.cs" />
     <Compile Include="Generators\ConstantGenerator.cs" />
     <Compile Include="Generators\FileGenerator.cs" />
     <Compile Include="Generators\IArrayGenerator.cs" />
+    <Compile Include="Generators\IBinaryConditionGenerator.cs" />
+    <Compile Include="Generators\IConditionalOperatorGenerator.cs" />
     <Compile Include="Generators\IfStatementGenerator.cs" />
     <Compile Include="Generators\IAssignmentGenerator.cs" />
     <Compile Include="Generators\IBlockGenerator.cs" />
@@ -72,9 +76,11 @@
     <Compile Include="IDependency.cs" />
     <Compile Include="Structures\ArrayStatement.cs" />
     <Compile Include="Structures\Assignment.cs" />
+    <Compile Include="Structures\BinaryCondition.cs" />
     <Compile Include="Structures\Block.cs" />
     <Compile Include="Structures\Class.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structures\ConditionalOperator.cs" />
     <Compile Include="Structures\Constant.cs" />
     <Compile Include="Structures\EmptyStatement.cs" />
     <Compile Include="Structures\File.cs" />
