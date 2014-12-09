@@ -2,10 +2,10 @@
 {
     public class Method : IMember
     {
-        public readonly string Name;
-        public readonly Modifier Modifier = Modifier.Private;
-        public readonly Parameter[] Parameters = { };
         public readonly IStatement Body;
+        public readonly Modifier Modifier = Modifier.Private;
+        public readonly string Name;
+        public readonly Parameter[] Parameters = {};
 
         public Method(string name)
         {

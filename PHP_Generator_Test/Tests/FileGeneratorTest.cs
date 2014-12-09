@@ -12,9 +12,11 @@ namespace PHP_Generator_Test.Tests
     [TestClass]
     public class FileGeneratorTest
     {
+        private ClassGeneratorStub _classGenerator;
         private FileGenerator _generator;
         private ReferenceGeneratorStub _referenceGenerator;
-        private ClassGeneratorStub _classGenerator;
+        private Type[] _types;
+        private readonly Dictionary<Type, object> _instances = new Dictionary<Type, object>();
 
         [TestInitialize]
         public void TestInitialize()
@@ -43,9 +45,9 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateReferences()
         {
-            _referenceGenerator.Results = new[] { @"use foo\bar;", @"use bar\foo;" };
+            _referenceGenerator.Results = new[] {@"use foo\bar;", @"use bar\foo;"};
 
-            var php = _generator.Generate(new File(new[] { new Reference(@"foo\bar"), new Reference(@"bar\foo") }));
+            var php = _generator.Generate(new File(new[] {new Reference(@"foo\bar"), new Reference(@"bar\foo")}));
 
             Assert.AreEqual(@"<?php use foo\bar;use bar\foo;", php);
         }
@@ -53,9 +55,9 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateClass()
         {
-            _classGenerator.Results = new[] { "class foo{}" };
+            _classGenerator.Results = new[] {"class foo{}"};
 
-            var php = _generator.Generate(new File(new[] { new Class("Foo") }));
+            var php = _generator.Generate(new File(new[] {new Class("Foo")}));
 
             Assert.AreEqual("<?php class foo{}", php);
         }
@@ -65,18 +67,20 @@ namespace PHP_Generator_Test.Tests
         {
             _generator = Resolve<FileGenerator>();
 
-            var references = new[] { new Reference(@"first\reference"), new Reference(@"second\reference") };
+            var references = new[] {new Reference(@"first\reference"), new Reference(@"second\reference")};
             var assignment = new Assignment(new Identifier("localName"), new Constant("value"));
-            var block = new Block(new[] { assignment });
+            var block = new Block(new[] {assignment});
             var method = new Method("methodName", block);
             var property = new Property("propertyName");
-            var @class = new Class("className", new IMember[] { property, method });
+            var @class = new Class("className", new IMember[] {property, method});
 
-            var file = new File(@"name\space", references, new[] { @class });
+            var file = new File(@"name\space", references, new[] {@class});
 
             var php = _generator.Generate(file);
 
-            Assert.AreEqual("<?php namespace name\\space;use first\\reference;use second\\reference;class className{private $propertyName;private function methodName(){$localName=\"value\";}}", php);
+            Assert.AreEqual(
+                "<?php namespace name\\space;use first\\reference;use second\\reference;class className{private $propertyName;private function methodName(){$localName=\"value\";}}",
+                php);
         }
 
         private T Resolve<T>()
@@ -86,7 +90,7 @@ namespace PHP_Generator_Test.Tests
                 InitializeTypes<T>();
             }
 
-            return (T)Resolve(typeof(T));
+            return (T) Resolve(typeof (T));
         }
 
         private void InitializeTypes<T>()
@@ -125,13 +129,10 @@ namespace PHP_Generator_Test.Tests
             {
                 var parameter = method.GetParameters().First();
 
-                method.Invoke(instance, new[] { Resolve(parameter.ParameterType) });
+                method.Invoke(instance, new[] {Resolve(parameter.ParameterType)});
             }
 
             return instance;
         }
-
-        private Dictionary<Type, object> _instances = new Dictionary<Type, object>();
-        private Type[] _types;
     }
 }

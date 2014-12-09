@@ -5,21 +5,12 @@ namespace PHP_Generator.Generators
 {
     public class MemberGenerator : IMemberGenerator, IDependency<IPropertyGenerator>, IDependency<IMethodGenerator>
     {
-        private IPropertyGenerator _propertyGenerator;
         private IMethodGenerator _methodGenerator;
+        private IPropertyGenerator _propertyGenerator;
 
-        public string Generate(IMember member)
+        public void InjectDependency(IMethodGenerator dependency)
         {
-            if (member is Property)
-            {
-                return _propertyGenerator.Generate((Property) member);
-            }
-            else if (member is Method)
-            {
-                return _methodGenerator.Generate((Method) member);
-            }
-
-            throw new NotImplementedException();
+            _methodGenerator = dependency;
         }
 
         public void InjectDependency(IPropertyGenerator dependency)
@@ -27,9 +18,18 @@ namespace PHP_Generator.Generators
             _propertyGenerator = dependency;
         }
 
-        public void InjectDependency(IMethodGenerator dependency)
+        public string Generate(IMember member)
         {
-            _methodGenerator = dependency;
+            if (member is Property)
+            {
+                return _propertyGenerator.Generate((Property) member);
+            }
+            if (member is Method)
+            {
+                return _methodGenerator.Generate((Method) member);
+            }
+
+            throw new NotImplementedException();
         }
     }
 }

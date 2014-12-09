@@ -3,10 +3,21 @@ using PHP_Generator.Structures;
 
 namespace PHP_Generator.Generators
 {
-    public class PropertyGenerator : IPropertyGenerator, IDependency<IModifierGenerator>, IDependency<IStatementGenerator>
+    public class PropertyGenerator : IPropertyGenerator, IDependency<IModifierGenerator>,
+        IDependency<IStatementGenerator>
     {
         private IModifierGenerator _modifierGenerator;
         private IStatementGenerator _statementGenerator;
+
+        public void InjectDependency(IModifierGenerator dependency)
+        {
+            _modifierGenerator = dependency;
+        }
+
+        public void InjectDependency(IStatementGenerator dependency)
+        {
+            _statementGenerator = dependency;
+        }
 
         public string Generate(Property property)
         {
@@ -20,16 +31,6 @@ namespace PHP_Generator.Generators
             }
 
             return code + ";";
-        }
-
-        public void InjectDependency(IModifierGenerator dependency)
-        {
-            _modifierGenerator = dependency;
-        }
-
-        public void InjectDependency(IStatementGenerator dependency)
-        {
-            _statementGenerator = dependency;
         }
     }
 }

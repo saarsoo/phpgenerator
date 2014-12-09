@@ -7,7 +7,7 @@ namespace PHP_Generator.Generators
     {
         public string Generate(Modifier modifier)
         {
-            switch(modifier)
+            switch (modifier)
             {
                 case Modifier.Public:
                     return "public";

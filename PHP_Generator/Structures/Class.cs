@@ -2,10 +2,10 @@
 {
     public class Class : IStatement
     {
-        public readonly string Name;
         public readonly string Extends;
-        public readonly string[] Implements = { };
+        public readonly string[] Implements = {};
         public readonly IMember[] Members = {};
+        public readonly string Name;
 
         public Class(string name)
         {

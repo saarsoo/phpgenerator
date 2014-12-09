@@ -3,8 +3,8 @@
     public class IfStatement : IStatement
     {
         public readonly IStatement Condition;
-        public readonly IStatement TrueBody;
         public readonly IStatement FalseBody;
+        public readonly IStatement TrueBody;
 
         public IfStatement(IStatement condition, IStatement trueBody)
         {

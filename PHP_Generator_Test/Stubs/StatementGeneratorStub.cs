@@ -3,7 +3,7 @@ using PHP_Generator.Structures;
 
 namespace PHP_Generator_Test.Stubs
 {
-    class StatementGeneratorStub : GeneratorStub<IStatement>, IStatementGenerator
+    internal class StatementGeneratorStub : GeneratorStub<IStatement>, IStatementGenerator
     {
     }
 }

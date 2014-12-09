@@ -21,11 +21,11 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerate()
         {
-            _statementGenerator.Results = new []{ "$foo = \"bar\"" };
+            _statementGenerator.Results = new[] {"$foo = \"bar\""};
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 
-            var block = new Block(new []{assignment});
+            var block = new Block(new[] {assignment});
 
             var php = _generator.Generate(block);
 

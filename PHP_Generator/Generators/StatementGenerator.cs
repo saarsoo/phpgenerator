@@ -9,10 +9,30 @@ namespace PHP_Generator.Generators
         IDependency<IAssignmentGenerator>,
         IDependency<IBlockGenerator>
     {
-        private IConstantGenerator _constantGenerator;
-        private IIdentifierGenerator _identifierGenerator;
         private IAssignmentGenerator _assignmentGenerator;
         private IBlockGenerator _blockGenerator;
+        private IConstantGenerator _constantGenerator;
+        private IIdentifierGenerator _identifierGenerator;
+
+        public void InjectDependency(IAssignmentGenerator dependency)
+        {
+            _assignmentGenerator = dependency;
+        }
+
+        public void InjectDependency(IBlockGenerator dependency)
+        {
+            _blockGenerator = dependency;
+        }
+
+        public void InjectDependency(IConstantGenerator dependency)
+        {
+            _constantGenerator = dependency;
+        }
+
+        public void InjectDependency(IIdentifierGenerator dependency)
+        {
+            _identifierGenerator = dependency;
+        }
 
         public string Generate(IStatement statement)
         {
@@ -38,26 +58,6 @@ namespace PHP_Generator.Generators
             }
 
             throw new NotImplementedException();
-        }
-
-        public void InjectDependency(IConstantGenerator dependency)
-        {
-            _constantGenerator = dependency;
-        }
-
-        public void InjectDependency(IIdentifierGenerator dependency)
-        {
-            _identifierGenerator = dependency;
-        }
-
-        public void InjectDependency(IAssignmentGenerator dependency)
-        {
-            _assignmentGenerator = dependency;
-        }
-
-        public void InjectDependency(IBlockGenerator dependency)
-        {
-            _blockGenerator = dependency;
         }
     }
 }

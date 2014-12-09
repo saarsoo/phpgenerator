@@ -27,10 +27,9 @@ namespace PHP_Generator_Test.Tests
         }
 
         [TestMethod]
-
         public void TestGenerateDefaultValue()
         {
-            _statementGenerator.Results = new []{ "\"bar\"" };
+            _statementGenerator.Results = new[] {"\"bar\""};
 
             var php = _generator.Generate(new Parameter("foo", new Constant("bar")));
 

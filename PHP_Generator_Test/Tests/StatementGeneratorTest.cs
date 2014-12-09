@@ -8,11 +8,11 @@ namespace PHP_Generator_Test.Tests
     [TestClass]
     public class StatementGeneratorTest
     {
-        private StatementGenerator _generator;
-        private ConstantGeneratorStub _constantGenerator;
-        private IdentifierGeneratorStub _identifierGenerator;
         private AssignmentGeneratorStub _assignmentGenerator;
         private BlockGeneratorStub _blockGenerator;
+        private ConstantGeneratorStub _constantGenerator;
+        private StatementGenerator _generator;
+        private IdentifierGeneratorStub _identifierGenerator;
 
         [TestInitialize]
         public void TestInitialize()
@@ -27,7 +27,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateConstant()
         {
-            _constantGenerator.Results = new []{ "\"foo\"" };
+            _constantGenerator.Results = new[] {"\"foo\""};
 
             var php = _generator.Generate(new Constant("foo"));
 
@@ -37,7 +37,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateIdentifier()
         {
-            _identifierGenerator.Results = new []{ "$bar" };
+            _identifierGenerator.Results = new[] {"$bar"};
 
             var php = _generator.Generate(new Identifier("bar"));
 
@@ -47,7 +47,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateAssignment()
         {
-            _assignmentGenerator.Results = new []{ "$foo = \"bar\"" };
+            _assignmentGenerator.Results = new[] {"$foo = \"bar\""};
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 
@@ -59,10 +59,10 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateBlock()
         {
-            _blockGenerator.Results = new []{ "$foo = \"bar\";" };
+            _blockGenerator.Results = new[] {"$foo = \"bar\";"};
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
-            var block = new Block(new []{ assignment });
+            var block = new Block(new[] {assignment});
 
             var php = _generator.Generate(block);
 

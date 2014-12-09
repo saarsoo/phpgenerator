@@ -2,8 +2,8 @@
 
 namespace PHP_Generator.Generators
 {
-    public interface IPropertyGenerator
+    public interface IArrayGenerator
     {
-        string Generate(Property property);
+        string Generate(ArrayStatement array);
     }
 }

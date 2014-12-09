@@ -35,7 +35,7 @@ namespace PHP_Generator.Generators
 
         public void InjectDependency(IMemberGenerator dependency)
         {
-            this._memberGenerator = dependency;
+            _memberGenerator = dependency;
         }
     }
 }

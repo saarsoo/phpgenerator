@@ -50,12 +50,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Stubs\ArrayGeneratorStub.cs" />
     <Compile Include="Stubs\MemberGeneratorStub.cs" />
     <Compile Include="Stubs\MethodGeneratorStub.cs" />
     <Compile Include="Stubs\ModifierGeneratorStub.cs" />
     <Compile Include="Stubs\ParameterGeneratorStub.cs" />
     <Compile Include="Stubs\PropertyGeneratorStub.cs" />
     <Compile Include="Stubs\ReferenceGeneratorStub.cs" />
+    <Compile Include="Tests\ArrayGeneratorTest.cs" />
+    <Compile Include="Tests\MemberGeneratorTest.cs" />
     <Compile Include="Tests\AssignmentGeneratorTest.cs" />
     <Compile Include="Tests\BlockGeneratorTest.cs" />
     <Compile Include="Tests\ClassGeneratorTest.cs" />

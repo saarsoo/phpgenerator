@@ -9,6 +9,6 @@
         {
             Identifier = identifier;
             Statement = statement;
-        } 
+        }
     }
 }

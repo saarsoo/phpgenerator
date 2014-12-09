@@ -7,6 +7,11 @@ namespace PHP_Generator.Generators
     {
         private IStatementGenerator _statementGenerator;
 
+        public void InjectDependency(IStatementGenerator dependency)
+        {
+            _statementGenerator = dependency;
+        }
+
         public string Generate(IfStatement ifStatement)
         {
             var condition = _statementGenerator.Generate(ifStatement.Condition);
@@ -30,11 +35,6 @@ namespace PHP_Generator.Generators
             }
 
             return code;
-        }
-
-        public void InjectDependency(IStatementGenerator dependency)
-        {
-            _statementGenerator = dependency;
         }
     }
 }

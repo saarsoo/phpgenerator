@@ -3,7 +3,8 @@ using PHP_Generator.Structures;
 
 namespace PHP_Generator.Generators
 {
-    public class AssignmentGenerator : IAssignmentGenerator, IDependency<IIdentifierGenerator>, IDependency<IStatementGenerator>
+    public class AssignmentGenerator : IAssignmentGenerator, IDependency<IIdentifierGenerator>,
+        IDependency<IStatementGenerator>
     {
         private IIdentifierGenerator _identifierGenerator;
         private IStatementGenerator _statementGenerator;

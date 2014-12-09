@@ -1,6 +1,6 @@
 ﻿namespace PHP_Generator.Structures
 {
-    public interface IMember
+    public class EmptyStatement : IStatement
     {
     }
 }

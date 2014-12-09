@@ -2,9 +2,9 @@
 {
     public class File
     {
+        public readonly Class[] Classes = {};
         public readonly string Namespace;
-        public readonly Reference[] References = { };
-        public readonly Class[] Classes = { };
+        public readonly Reference[] References = {};
 
         public File()
         {

@@ -23,8 +23,8 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerate()
         {
-            _identifierGenerator.Results = new []{ "$foo" };
-            _statementGenerator.Results = new []{ "\"bar\"" };
+            _identifierGenerator.Results = new[] {"$foo"};
+            _statementGenerator.Results = new[] {"\"bar\""};
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 

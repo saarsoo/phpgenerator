@@ -21,7 +21,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerate()
         {
-            _statementGenerator.Results = new[] { "true", "$foo=\"bar\"" };
+            _statementGenerator.Results = new[] {"true", "$foo=\"bar\""};
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 
@@ -33,7 +33,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateFalseBody()
         {
-            _statementGenerator.Results = new[] { "true", "$foo=\"bar\"", "$bar=\"foo\"" };
+            _statementGenerator.Results = new[] {"true", "$foo=\"bar\"", "$bar=\"foo\""};
 
             var assignment1 = new Assignment(new Identifier("foo"), new Constant("bar"));
             var assignment2 = new Assignment(new Identifier("bar"), new Constant("foo"));

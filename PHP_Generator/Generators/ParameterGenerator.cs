@@ -7,6 +7,11 @@ namespace PHP_Generator.Generators
     {
         private IStatementGenerator _statementGenerator;
 
+        public void InjectDependency(IStatementGenerator dependency)
+        {
+            _statementGenerator = dependency;
+        }
+
         public string Generate(Parameter parameter)
         {
             var code = String.Format("${0}", parameter.Name);
@@ -17,11 +22,6 @@ namespace PHP_Generator.Generators
             }
 
             return code;
-        }
-
-        public void InjectDependency(IStatementGenerator dependency)
-        {
-            _statementGenerator = dependency;
         }
     }
 }
