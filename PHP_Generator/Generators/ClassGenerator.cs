@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using PHP_Generator.Structures;
 
 namespace PHP_Generator.Generators
@@ -16,7 +17,7 @@ namespace PHP_Generator.Generators
                 code += String.Format(" extends {0}", @class.Extends);
             }
 
-            if (@class.Implements.Length > 0)
+            if (@class.Implements.Any())
             {
                 code += String.Format(" implements {0}", String.Join(",", @class.Implements));
             }

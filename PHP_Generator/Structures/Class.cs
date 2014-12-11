@@ -1,12 +1,14 @@
-﻿namespace PHP_Generator.Structures
+﻿using System.Collections.Generic;
+
+namespace PHP_Generator.Structures
 {
     public class Class : IStatement
     {
         public string Name { get; set; }
 
         public string Extends { get; set; }
-        public string[] Implements { get; set; }
-        public IMember[] Members { get; set; }
+        public IEnumerable<string> Implements { get; set; }
+        public IEnumerable<IMember> Members { get; set; }
 
         public Class(string name)
         {

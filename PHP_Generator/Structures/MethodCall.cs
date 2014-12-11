@@ -1,9 +1,11 @@
-﻿namespace PHP_Generator.Structures
+﻿using System.Collections.Generic;
+
+namespace PHP_Generator.Structures
 {
     public class MethodCall : IStatement
     {
         public string Name { get; set; }
-        public IStatement[] Arguments { get; set; }
+        public IEnumerable<IStatement> Arguments { get; set; }
 
         public MethodCall(string name)
         {
