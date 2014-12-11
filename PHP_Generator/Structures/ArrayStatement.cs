@@ -8,6 +8,7 @@ namespace PHP_Generator.Structures
 
         public ArrayStatement()
         {
+            Values = new Dictionary<IStatement, IStatement>();
         }
 
         public ArrayStatement(Dictionary<IStatement, IStatement> values)
