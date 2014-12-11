@@ -18,6 +18,13 @@
             Members = members;
         }
 
+        public Class(string name, string extends, IMember[] members)
+        {
+            Name = name;
+            Extends = extends;
+            Members = members;
+        }
+
         public Class(string name, string extends)
         {
             Name = name;

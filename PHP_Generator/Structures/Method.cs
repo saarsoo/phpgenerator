@@ -12,6 +12,12 @@
             Name = name;
         }
 
+        public Method(Modifier modifier, string name)
+        {
+            Modifier = modifier;
+            Name = name;
+        }
+
         public Method(string name, IStatement body)
         {
             Name = name;
@@ -26,6 +32,14 @@
 
         public Method(string name, Parameter[] parameters, IStatement body)
         {
+            Name = name;
+            Parameters = parameters;
+            Body = body;
+        }
+
+        public Method(Modifier modifier, string name, Parameter[] parameters, IStatement body)
+        {
+            Modifier = modifier;
             Name = name;
             Parameters = parameters;
             Body = body;

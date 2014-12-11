@@ -21,7 +21,7 @@ namespace PHP_Generator_Test.Tests
             _generator.InjectDependency(_parameterGenerator = new ParameterGeneratorStub());
             _generator.InjectDependency(_statementGenerator = new StatementGeneratorStub());
 
-            _modifierGenerator.Results = new[] {"private"};
+            _modifierGenerator.Results = new[] { "private" };
         }
 
         [TestMethod]
@@ -35,9 +35,9 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateParameter()
         {
-            _parameterGenerator.Results = new[] {"$bar"};
+            _parameterGenerator.Results = new[] { "$bar" };
 
-            var php = _generator.Generate(new Method("foo", new[] {new Parameter("bar")}));
+            var php = _generator.Generate(new Method("foo", new[] { new Parameter("bar") }));
 
             Assert.AreEqual("private function foo($bar){}", php);
         }
@@ -45,7 +45,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateBody()
         {
-            _statementGenerator.Results = new[] {"$foo=\"bar\""};
+            _statementGenerator.Results = new[] { "$foo=\"bar\"" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 
@@ -57,14 +57,24 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateBlockBody()
         {
-            _statementGenerator.Results = new[] {"$foo=\"bar\";"};
+            _statementGenerator.Results = new[] { "$foo=\"bar\";" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
-            var block = new Block(new[] {assignment});
+            var block = new Block(new[] { assignment });
 
             var php = _generator.Generate(new Method("foo", block));
 
             Assert.AreEqual("private function foo(){$foo=\"bar\";}", php);
+        }
+
+        [TestMethod]
+        public void TestGenerateModifier()
+        {
+            _modifierGenerator.Results = new[] { "public" };
+
+            var php = _generator.Generate(new Method(Modifier.Public, "foobar"));
+
+            Assert.AreEqual("public function foobar(){}", php);
         }
     }
 }
