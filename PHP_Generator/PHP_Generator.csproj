@@ -73,6 +73,7 @@
     <Compile Include="Generators\IMethodCallGenerator.cs" />
     <Compile Include="Generators\IMethodGenerator.cs" />
     <Compile Include="Generators\IModifierGenerator.cs" />
+    <Compile Include="Generators\INewStatementGenerator.cs" />
     <Compile Include="Generators\IParameterGenerator.cs" />
     <Compile Include="Generators\IPropertyGenerator.cs" />
     <Compile Include="Generators\IReferenceGenerator.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Generators\MethodCallGenerator.cs" />
     <Compile Include="Generators\MethodGenerator.cs" />
     <Compile Include="Generators\ModifierGenerator.cs" />
+    <Compile Include="Generators\NewStatementGenerator.cs" />
     <Compile Include="Generators\ParameterGenerator.cs" />
     <Compile Include="Generators\PropertyGenerator.cs" />
     <Compile Include="Generators\ReferenceGenerator.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Structures\MethodCall.cs" />
     <Compile Include="Structures\Modifier.cs" />
     <Compile Include="Structures\Namespace.cs" />
+    <Compile Include="Structures\NewStatement.cs" />
     <Compile Include="Structures\Parameter.cs" />
     <Compile Include="Structures\PHPStart.cs" />
     <Compile Include="Structures\Property.cs" />

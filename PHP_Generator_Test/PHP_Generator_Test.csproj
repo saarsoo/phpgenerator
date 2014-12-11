@@ -63,6 +63,7 @@
     <Compile Include="Stubs\MethodCallGeneratorStub.cs" />
     <Compile Include="Stubs\MethodGeneratorStub.cs" />
     <Compile Include="Stubs\ModifierGeneratorStub.cs" />
+    <Compile Include="Stubs\NewStatementGeneratorStub.cs" />
     <Compile Include="Stubs\ParameterGeneratorStub.cs" />
     <Compile Include="Stubs\PropertyGeneratorStub.cs" />
     <Compile Include="Stubs\ReferenceGeneratorStub.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Tests\MethodCallGeneratorTest.cs" />
     <Compile Include="Tests\MethodGeneratorTest.cs" />
     <Compile Include="Tests\ModifierGeneratorTest.cs" />
+    <Compile Include="Tests\NewStatementGeneratorTest.cs" />
     <Compile Include="Tests\ParameterGeneratorTest.cs" />
     <Compile Include="Tests\PropertyGeneratorTest.cs" />
     <Compile Include="Tests\ReferenceGeneratorTest.cs" />

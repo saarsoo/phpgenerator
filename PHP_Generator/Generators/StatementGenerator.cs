@@ -11,7 +11,8 @@ namespace PHP_Generator.Generators
         IDependency<IArrayGenerator>,
         IDependency<IAccessorGenerator>,
         IDependency<IMethodCallGenerator>,
-        IDependency<IReturnStatementGenerator>
+        IDependency<IReturnStatementGenerator>,
+        IDependency<INewStatementGenerator>
     {
         private IAssignmentGenerator _assignmentGenerator;
         private IBlockGenerator _blockGenerator;
@@ -21,6 +22,7 @@ namespace PHP_Generator.Generators
         private IAccessorGenerator _accessorGenerator;
         private IMethodCallGenerator _methodCallGenerator;
         private IReturnStatementGenerator _returnStatementGenerator;
+        private INewStatementGenerator _newStatementGenerator;
 
         public void InjectDependency(IAssignmentGenerator dependency)
         {
@@ -80,6 +82,10 @@ namespace PHP_Generator.Generators
             {
                 return _returnStatementGenerator.Generate(statement as ReturnStatement);
             }
+            if (statement is NewStatement)
+            {
+                return _newStatementGenerator.Generate(statement as NewStatement);
+            }
 
             throw new NotImplementedException();
         }
@@ -102,6 +108,11 @@ namespace PHP_Generator.Generators
         public void InjectDependency(IReturnStatementGenerator dependency)
         {
             _returnStatementGenerator = dependency;
+        }
+
+        public void InjectDependency(INewStatementGenerator dependency)
+        {
+            _newStatementGenerator = dependency;
         }
     }
 }
