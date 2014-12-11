@@ -9,7 +9,8 @@ namespace PHP_Generator.Generators
         IDependency<IAssignmentGenerator>,
         IDependency<IBlockGenerator>,
         IDependency<IArrayGenerator>,
-        IDependency<IAccessorGenerator>
+        IDependency<IAccessorGenerator>,
+        IDependency<IMethodCallGenerator>
     {
         private IAssignmentGenerator _assignmentGenerator;
         private IBlockGenerator _blockGenerator;
@@ -17,6 +18,7 @@ namespace PHP_Generator.Generators
         private IIdentifierGenerator _identifierGenerator;
         private IArrayGenerator _arrayGenerator;
         private IAccessorGenerator _accessorGenerator;
+        private IMethodCallGenerator _methodCallGenerator;
 
         public void InjectDependency(IAssignmentGenerator dependency)
         {
@@ -68,6 +70,10 @@ namespace PHP_Generator.Generators
             {
                 return _accessorGenerator.Generate(statement as Accessor);
             }
+            if (statement is MethodCall)
+            {
+                return _methodCallGenerator.Generate(statement as MethodCall);
+            }
 
             throw new NotImplementedException();
         }
@@ -80,6 +86,11 @@ namespace PHP_Generator.Generators
         public void InjectDependency(IAccessorGenerator dependency)
         {
             _accessorGenerator = dependency;
+        }
+
+        public void InjectDependency(IMethodCallGenerator dependency)
+        {
+            _methodCallGenerator = dependency;
         }
     }
 }

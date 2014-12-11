@@ -15,6 +15,7 @@ namespace PHP_Generator_Test.Tests
         private IdentifierGeneratorStub _identifierGenerator;
         private ArrayGeneratorStub _arrayGenerator;
         private AccessorGeneratorStub _accessorGenerator;
+        private MethodCallGeneratorStub _methodCallGenerator;
 
         [TestInitialize]
         public void TestInitialize()
@@ -26,6 +27,7 @@ namespace PHP_Generator_Test.Tests
             _generator.InjectDependency(_blockGenerator = new BlockGeneratorStub());
             _generator.InjectDependency(_arrayGenerator = new ArrayGeneratorStub());
             _generator.InjectDependency(_accessorGenerator = new AccessorGeneratorStub());
+            _generator.InjectDependency(_methodCallGenerator = new MethodCallGeneratorStub());
         }
 
         [TestMethod]
@@ -99,6 +101,16 @@ namespace PHP_Generator_Test.Tests
             var php = _generator.Generate(new Accessor(new Identifier("foo"), AccessorType.Pointer, new Identifier("bar", true)));
 
             Assert.AreEqual("$foo->bar", php);
+        }
+
+        [TestMethod]
+        public void TestGenerateMethodCall()
+        {
+            _methodCallGenerator.Results = new[] { "foobar()" };
+
+            var php = _generator.Generate(new MethodCall("foobar"));
+
+            Assert.AreEqual("foobar()", php);
         }
     }
 }
