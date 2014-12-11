@@ -98,7 +98,7 @@ namespace PHP_Generator_Test.Tests
         {
             _accessorGenerator.Results = new[] { "$foo->bar" };
 
-            var php = _generator.Generate(new Accessor(new Identifier("foo"), AccessorType.Pointer, new Identifier("bar", true)));
+            var php = _generator.Generate(new Accessor(new Identifier("foo"), new Identifier("bar", true)) { Type = AccessorType.Pointer });
 
             Assert.AreEqual("$foo->bar", php);
         }

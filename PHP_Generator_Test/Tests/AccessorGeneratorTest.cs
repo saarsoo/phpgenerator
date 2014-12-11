@@ -27,7 +27,7 @@ namespace PHP_Generator_Test.Tests
             _statementGenerator.Results = new[] { "$foo", "bar" };
             _accessorTypeGenerator.Results = new[] { "->" };
 
-            var php = _generator.Generate(new Accessor(new Identifier("foo"), AccessorType.Pointer, new Identifier("bar", true)));
+            var php = _generator.Generate(new Accessor(new Identifier("foo"), new Identifier("bar", true)) { Type = AccessorType.Pointer });
 
             Assert.AreEqual("$foo->bar", php);
         }
@@ -37,7 +37,7 @@ namespace PHP_Generator_Test.Tests
         {
             _statementGenerator.Results = new[] { "$this", "\"is sparta!\"" };
 
-            var php = _generator.Generate(new Accessor(new Identifier("this"), AccessorType.Index, new Constant("is sparta!")));
+            var php = _generator.Generate(new Accessor(new Identifier("this"), new Constant("is sparta!")) { Type = AccessorType.Index });
 
             Assert.AreEqual("$this[\"is sparta!\"]", php);
         }

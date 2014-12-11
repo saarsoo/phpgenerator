@@ -45,6 +45,7 @@
     <Compile Include="Generators\ArrayGenerator.cs" />
     <Compile Include="Generators\AssignmentGenerator.cs" />
     <Compile Include="Generators\ArithmeticGenerator.cs" />
+    <Compile Include="Generators\AssignmentTypeGenerator.cs" />
     <Compile Include="Generators\ConditionGenerator.cs" />
     <Compile Include="Generators\BlockGenerator.cs" />
     <Compile Include="Generators\ClassGenerator.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Generators\IArithmeticOperatorGenerator.cs" />
     <Compile Include="Generators\IArrayGenerator.cs" />
     <Compile Include="Generators\IArithmeticGenerator.cs" />
+    <Compile Include="Generators\IAssignmentTypeGenerator.cs" />
     <Compile Include="Generators\IConditionGenerator.cs" />
     <Compile Include="Generators\IConditionalOperatorGenerator.cs" />
     <Compile Include="Generators\IfStatementGenerator.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Structures\ArrayStatement.cs" />
     <Compile Include="Structures\Assignment.cs" />
     <Compile Include="Structures\Arithmetic.cs" />
+    <Compile Include="Structures\AssignmentType.cs" />
     <Compile Include="Structures\Condition.cs" />
     <Compile Include="Structures\Block.cs" />
     <Compile Include="Structures\Class.cs" />

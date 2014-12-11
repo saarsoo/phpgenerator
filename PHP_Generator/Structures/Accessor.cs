@@ -12,11 +12,10 @@ namespace PHP_Generator.Structures
         public AccessorType Type { get; set; }
         public IStatement To { get; set; }
 
-        public Accessor(IStatement @from, AccessorType type, IStatement to)
+        public Accessor(IStatement @from, IStatement to)
         {
             From = @from;
             To = to;
-            Type = type;
         }
     }
 }
