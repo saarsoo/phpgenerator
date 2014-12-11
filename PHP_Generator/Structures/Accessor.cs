@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PHP_Generator.Structures
 {
-    public class Accessor
+    public class Accessor : IStatement
     {
         public readonly IStatement From;
         public readonly AccessorType Type;

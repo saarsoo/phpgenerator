@@ -8,14 +8,9 @@ namespace PHP_Generator.Generators
         private IClassGenerator _classGenerator;
         private IReferenceGenerator _referenceGenerator;
 
-        public void InjectDependency(IClassGenerator dependency)
+        public static FileGenerator CreateGenerator()
         {
-            _classGenerator = dependency;
-        }
-
-        public void InjectDependency(IReferenceGenerator dependency)
-        {
-            _referenceGenerator = dependency;
+            return new Resolver("PHP_Generator").Resolve<FileGenerator>();
         }
 
         public string Generate(File file)
@@ -38,6 +33,16 @@ namespace PHP_Generator.Generators
             }
 
             return code;
+        }
+
+        public void InjectDependency(IClassGenerator dependency)
+        {
+            _classGenerator = dependency;
+        }
+
+        public void InjectDependency(IReferenceGenerator dependency)
+        {
+            _referenceGenerator = dependency;
         }
     }
 }

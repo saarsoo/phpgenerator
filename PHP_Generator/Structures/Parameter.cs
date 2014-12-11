@@ -22,5 +22,12 @@
             Type = type;
             Name = name;
         }
+
+        public Parameter(string type, string name, IStatement statement)
+        {
+            Type = type;
+            Name = name;
+            Statement = statement;
+        }
     }
 }

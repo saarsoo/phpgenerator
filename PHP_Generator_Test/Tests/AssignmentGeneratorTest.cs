@@ -9,22 +9,19 @@ namespace PHP_Generator_Test.Tests
     public class AssignmentGeneratorTest
     {
         private AssignmentGenerator _generator;
-        private IdentifierGeneratorStub _identifierGenerator;
         private StatementGeneratorStub _statementGenerator;
 
         [TestInitialize]
         public void TestInitialize()
         {
             _generator = new AssignmentGenerator();
-            _generator.InjectDependency(_identifierGenerator = new IdentifierGeneratorStub());
             _generator.InjectDependency(_statementGenerator = new StatementGeneratorStub());
         }
 
         [TestMethod]
         public void TestGenerate()
         {
-            _identifierGenerator.Results = new[] {"$foo"};
-            _statementGenerator.Results = new[] {"\"bar\""};
+            _statementGenerator.Results = new[] {"$foo", "\"bar\""};
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 

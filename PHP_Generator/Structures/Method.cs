@@ -23,5 +23,12 @@
             Name = name;
             Parameters = parameters;
         }
+
+        public Method(string name, Parameter[] parameters, IStatement body)
+        {
+            Name = name;
+            Parameters = parameters;
+            Body = body;
+        }
     }
 }

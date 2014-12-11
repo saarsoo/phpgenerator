@@ -3,23 +3,16 @@ using PHP_Generator.Structures;
 
 namespace PHP_Generator.Generators
 {
-    public class AssignmentGenerator : IAssignmentGenerator, IDependency<IIdentifierGenerator>,
-        IDependency<IStatementGenerator>
+    public class AssignmentGenerator : IAssignmentGenerator, IDependency<IStatementGenerator>
     {
-        private IIdentifierGenerator _identifierGenerator;
         private IStatementGenerator _statementGenerator;
 
         public string Generate(Assignment assignment)
         {
-            var identifier = _identifierGenerator.Generate(assignment.Identifier);
-            var statement = _statementGenerator.Generate(assignment.Statement);
+            var from = _statementGenerator.Generate(assignment.From);
+            var to = _statementGenerator.Generate(assignment.To);
 
-            return String.Format("{0}={1}", identifier, statement);
-        }
-
-        public void InjectDependency(IIdentifierGenerator dependency)
-        {
-            _identifierGenerator = dependency;
+            return String.Format("{0}={1}", from, to);
         }
 
         public void InjectDependency(IStatementGenerator dependency)

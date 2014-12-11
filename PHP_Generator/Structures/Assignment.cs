@@ -2,13 +2,13 @@
 {
     public class Assignment : IStatement
     {
-        public readonly Identifier Identifier;
-        public readonly IStatement Statement;
+        public readonly IStatement From;
+        public readonly IStatement To;
 
-        public Assignment(Identifier identifier, IStatement statement)
+        public Assignment(IStatement @from, IStatement to)
         {
-            Identifier = identifier;
-            Statement = statement;
+            From = @from;
+            To = to;
         }
     }
 }

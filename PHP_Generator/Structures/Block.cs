@@ -4,7 +4,7 @@
     {
         public readonly IStatement[] Statements;
 
-        public Block(Assignment[] statements)
+        public Block(IStatement[] statements)
         {
             Statements = statements;
         }

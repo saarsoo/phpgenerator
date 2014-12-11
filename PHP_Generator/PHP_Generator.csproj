@@ -84,6 +84,7 @@
     <Compile Include="Generators\ReferenceGenerator.cs" />
     <Compile Include="Generators\StatementGenerator.cs" />
     <Compile Include="IDependency.cs" />
+    <Compile Include="Resolver.cs" />
     <Compile Include="Structures\Accessor.cs" />
     <Compile Include="Structures\AccessorType.cs" />
     <Compile Include="Structures\ArithmeticOperator.cs" />
