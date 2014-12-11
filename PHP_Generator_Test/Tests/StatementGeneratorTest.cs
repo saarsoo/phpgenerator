@@ -14,6 +14,7 @@ namespace PHP_Generator_Test.Tests
         private StatementGenerator _generator;
         private IdentifierGeneratorStub _identifierGenerator;
         private ArrayGeneratorStub _arrayGenerator;
+        private AccessorGeneratorStub _accessorGenerator;
 
         [TestInitialize]
         public void TestInitialize()
@@ -24,12 +25,13 @@ namespace PHP_Generator_Test.Tests
             _generator.InjectDependency(_assignmentGenerator = new AssignmentGeneratorStub());
             _generator.InjectDependency(_blockGenerator = new BlockGeneratorStub());
             _generator.InjectDependency(_arrayGenerator = new ArrayGeneratorStub());
+            _generator.InjectDependency(_accessorGenerator = new AccessorGeneratorStub());
         }
 
         [TestMethod]
         public void TestGenerateConstant()
         {
-            _constantGenerator.Results = new[] {"\"foo\""};
+            _constantGenerator.Results = new[] { "\"foo\"" };
 
             var php = _generator.Generate(new Constant("foo"));
 
@@ -39,7 +41,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateIdentifier()
         {
-            _identifierGenerator.Results = new[] {"$bar"};
+            _identifierGenerator.Results = new[] { "$bar" };
 
             var php = _generator.Generate(new Identifier("bar"));
 
@@ -49,7 +51,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateAssignment()
         {
-            _assignmentGenerator.Results = new[] {"$foo = \"bar\""};
+            _assignmentGenerator.Results = new[] { "$foo = \"bar\"" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 
@@ -61,10 +63,10 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateBlock()
         {
-            _blockGenerator.Results = new[] {"$foo = \"bar\";"};
+            _blockGenerator.Results = new[] { "$foo = \"bar\";" };
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
-            var block = new Block(new[] {assignment});
+            var block = new Block(new[] { assignment });
 
             var php = _generator.Generate(block);
 
@@ -82,11 +84,21 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateArray()
         {
-            _arrayGenerator.Results = new[] {"array()"};
+            _arrayGenerator.Results = new[] { "array()" };
 
             var php = _generator.Generate(new ArrayStatement());
 
             Assert.AreEqual("array()", php);
+        }
+
+        [TestMethod]
+        public void TestGenerateAccessor()
+        {
+            _accessorGenerator.Results = new[] { "$foo->bar" };
+
+            var php = _generator.Generate(new Accessor(new Identifier("foo"), AccessorType.Pointer, new Identifier("bar", true)));
+
+            Assert.AreEqual("$foo->bar", php);
         }
     }
 }

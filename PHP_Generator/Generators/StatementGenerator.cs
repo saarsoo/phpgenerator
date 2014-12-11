@@ -8,13 +8,15 @@ namespace PHP_Generator.Generators
         IDependency<IIdentifierGenerator>,
         IDependency<IAssignmentGenerator>,
         IDependency<IBlockGenerator>,
-        IDependency<IArrayGenerator>
+        IDependency<IArrayGenerator>,
+        IDependency<IAccessorGenerator>
     {
         private IAssignmentGenerator _assignmentGenerator;
         private IBlockGenerator _blockGenerator;
         private IConstantGenerator _constantGenerator;
         private IIdentifierGenerator _identifierGenerator;
         private IArrayGenerator _arrayGenerator;
+        private IAccessorGenerator _accessorGenerator;
 
         public void InjectDependency(IAssignmentGenerator dependency)
         {
@@ -62,6 +64,10 @@ namespace PHP_Generator.Generators
             {
                 return _arrayGenerator.Generate(statement as ArrayStatement);
             }
+            if (statement is Accessor)
+            {
+                return _accessorGenerator.Generate(statement as Accessor);
+            }
 
             throw new NotImplementedException();
         }
@@ -69,6 +75,11 @@ namespace PHP_Generator.Generators
         public void InjectDependency(IArrayGenerator dependency)
         {
             _arrayGenerator = dependency;
+        }
+
+        public void InjectDependency(IAccessorGenerator dependency)
+        {
+            _accessorGenerator = dependency;
         }
     }
 }
