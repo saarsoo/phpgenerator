@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Remoting.Channels;
 using PHP_Generator.Structures;
 
 namespace PHP_Generator.Generators

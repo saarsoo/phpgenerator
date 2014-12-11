@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PHP_Generator.Generators;
 using PHP_Generator.Structures;
 using PHP_Generator_Test.Stubs;
