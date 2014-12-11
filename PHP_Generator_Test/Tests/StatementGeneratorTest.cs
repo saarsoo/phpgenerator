@@ -13,6 +13,7 @@ namespace PHP_Generator_Test.Tests
         private ConstantGeneratorStub _constantGenerator;
         private StatementGenerator _generator;
         private IdentifierGeneratorStub _identifierGenerator;
+        private ArrayGeneratorStub _arrayGenerator;
 
         [TestInitialize]
         public void TestInitialize()
@@ -22,6 +23,7 @@ namespace PHP_Generator_Test.Tests
             _generator.InjectDependency(_identifierGenerator = new IdentifierGeneratorStub());
             _generator.InjectDependency(_assignmentGenerator = new AssignmentGeneratorStub());
             _generator.InjectDependency(_blockGenerator = new BlockGeneratorStub());
+            _generator.InjectDependency(_arrayGenerator = new ArrayGeneratorStub());
         }
 
         [TestMethod]
@@ -75,6 +77,16 @@ namespace PHP_Generator_Test.Tests
             var php = _generator.Generate(new PhpStart());
 
             Assert.AreEqual("<?php", php);
+        }
+
+        [TestMethod]
+        public void TestGenerateArray()
+        {
+            _arrayGenerator.Results = new[] {"array()"};
+
+            var php = _generator.Generate(new ArrayStatement());
+
+            Assert.AreEqual("array()", php);
         }
     }
 }

@@ -7,12 +7,14 @@ namespace PHP_Generator.Generators
         IDependency<IConstantGenerator>,
         IDependency<IIdentifierGenerator>,
         IDependency<IAssignmentGenerator>,
-        IDependency<IBlockGenerator>
+        IDependency<IBlockGenerator>,
+        IDependency<IArrayGenerator>
     {
         private IAssignmentGenerator _assignmentGenerator;
         private IBlockGenerator _blockGenerator;
         private IConstantGenerator _constantGenerator;
         private IIdentifierGenerator _identifierGenerator;
+        private IArrayGenerator _arrayGenerator;
 
         public void InjectDependency(IAssignmentGenerator dependency)
         {
@@ -56,8 +58,17 @@ namespace PHP_Generator.Generators
             {
                 return "<?php";
             }
+            if (statement is ArrayStatement)
+            {
+                return _arrayGenerator.Generate(statement as ArrayStatement);
+            }
 
             throw new NotImplementedException();
+        }
+
+        public void InjectDependency(IArrayGenerator dependency)
+        {
+            _arrayGenerator = dependency;
         }
     }
 }
