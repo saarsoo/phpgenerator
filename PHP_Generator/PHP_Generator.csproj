@@ -76,6 +76,7 @@
     <Compile Include="Generators\IParameterGenerator.cs" />
     <Compile Include="Generators\IPropertyGenerator.cs" />
     <Compile Include="Generators\IReferenceGenerator.cs" />
+    <Compile Include="Generators\IReturnStatementGenerator.cs" />
     <Compile Include="Generators\IStatementGenerator.cs" />
     <Compile Include="Generators\MemberGenerator.cs" />
     <Compile Include="Generators\MethodCallGenerator.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Generators\ParameterGenerator.cs" />
     <Compile Include="Generators\PropertyGenerator.cs" />
     <Compile Include="Generators\ReferenceGenerator.cs" />
+    <Compile Include="Generators\ReturnStatementGenerator.cs" />
     <Compile Include="Generators\StatementGenerator.cs" />
     <Compile Include="IDependency.cs" />
     <Compile Include="Resolver.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Structures\PHPStart.cs" />
     <Compile Include="Structures\Property.cs" />
     <Compile Include="Structures\Reference.cs" />
+    <Compile Include="Structures\ReturnStatement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

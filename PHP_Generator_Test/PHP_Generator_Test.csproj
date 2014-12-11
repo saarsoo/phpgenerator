@@ -66,6 +66,7 @@
     <Compile Include="Stubs\ParameterGeneratorStub.cs" />
     <Compile Include="Stubs\PropertyGeneratorStub.cs" />
     <Compile Include="Stubs\ReferenceGeneratorStub.cs" />
+    <Compile Include="Stubs\ReturnStatementGeneratorStub.cs" />
     <Compile Include="Tests\AccessorGeneratorTest.cs" />
     <Compile Include="Tests\AccessorTypeGeneratorTest.cs" />
     <Compile Include="Tests\ArithmeticGeneratorTest.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Tests\ParameterGeneratorTest.cs" />
     <Compile Include="Tests\PropertyGeneratorTest.cs" />
     <Compile Include="Tests\ReferenceGeneratorTest.cs" />
+    <Compile Include="Tests\ReturnStatementGeneratorTest.cs" />
     <Compile Include="Tests\StatementGeneratorTest.cs" />
     <Compile Include="Stubs\AssignmentGeneratorStub.cs" />
     <Compile Include="Stubs\BlockGeneratorStub.cs" />
