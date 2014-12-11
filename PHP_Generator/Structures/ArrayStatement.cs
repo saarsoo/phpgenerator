@@ -4,7 +4,7 @@ namespace PHP_Generator.Structures
 {
     public class ArrayStatement : IStatement
     {
-        public readonly Dictionary<IStatement, IStatement> Values = new Dictionary<IStatement, IStatement>();
+        public Dictionary<IStatement, IStatement> Values { get; set; }
 
         public ArrayStatement()
         {

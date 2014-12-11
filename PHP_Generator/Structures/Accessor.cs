@@ -8,9 +8,9 @@ namespace PHP_Generator.Structures
 {
     public class Accessor : IStatement
     {
-        public readonly IStatement From;
-        public readonly AccessorType Type;
-        public readonly IStatement To;
+        public IStatement From { get; set; }
+        public AccessorType Type { get; set; }
+        public IStatement To { get; set; }
 
         public Accessor(IStatement @from, AccessorType type, IStatement to)
         {

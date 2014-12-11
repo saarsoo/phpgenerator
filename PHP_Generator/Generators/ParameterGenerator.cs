@@ -24,9 +24,9 @@ namespace PHP_Generator.Generators
             code += String.Format("${0}", parameter.Name);
 
 
-            if (parameter.Statement != null)
+            if (parameter.DefaultValue != null)
             {
-                code += "=" + _statementGenerator.Generate(parameter.Statement);
+                code += "=" + _statementGenerator.Generate(parameter.DefaultValue);
             }
 
             return code;

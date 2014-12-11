@@ -2,7 +2,7 @@
 {
     public class Constant : IStatement
     {
-        public readonly object Value;
+        public object Value { get; set; }
 
         public Constant(object value)
         {

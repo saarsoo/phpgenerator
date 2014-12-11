@@ -2,9 +2,9 @@
 {
     public class Condition : IStatement
     {
-        public readonly IStatement LeftCondition;
-        public readonly ConditionalOperator Operator;
-        public readonly IStatement RightCondition;
+        public IStatement LeftCondition { get; set; }
+        public ConditionalOperator Operator { get; set; }
+        public IStatement RightCondition { get; set; }
 
         public Condition(IStatement leftCondition, ConditionalOperator @operator, IStatement rightCondition)
         {

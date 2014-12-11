@@ -31,7 +31,10 @@ namespace PHP_Generator_Test.Tests
         {
             _statementGenerator.Results = new[] { "\"bar\"" };
 
-            var php = _generator.Generate(new MethodCall("foo", new IStatement[] { new Constant("bar") }));
+            var php = _generator.Generate(new MethodCall("foo")
+            {
+                Arguments = new IStatement[] { new Constant("bar") }
+            });
 
             Assert.AreEqual("foo(\"bar\")", php);
         }
@@ -41,7 +44,10 @@ namespace PHP_Generator_Test.Tests
         {
             _statementGenerator.Results = new[] { "$foo", "\"bar\"" };
 
-            var php = _generator.Generate(new MethodCall("foobus", new IStatement[] { new Identifier("foo"), new Constant("bar") }));
+            var php = _generator.Generate(new MethodCall("foobus")
+            {
+                Arguments = new IStatement[] { new Identifier("foo"), new Constant("bar") }
+            });
 
             Assert.AreEqual("foobus($foo,\"bar\")", php);
         }

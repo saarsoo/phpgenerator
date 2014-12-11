@@ -2,7 +2,7 @@
 {
     public class Reference
     {
-        public readonly string Path;
+        public string Path { get; set; }
 
         public Reference(string path)
         {

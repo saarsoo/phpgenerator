@@ -31,7 +31,10 @@ namespace PHP_Generator_Test.Tests
         {
             _statementGenerator.Results = new[] {"\"bar\""};
 
-            var php = _generator.Generate(new Parameter("foo", new Constant("bar")));
+            var php = _generator.Generate(new Parameter("foo")
+            {
+                DefaultValue = new Constant("bar"),
+            });
 
             Assert.AreEqual("$foo=\"bar\"", php);
         }
@@ -39,7 +42,10 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateWithType()
         {
-            var php = _generator.Generate(new Parameter("Foo", "bar"));
+            var php = _generator.Generate(new Parameter("bar")
+            {
+                Type = "Foo"
+            });
 
             Assert.AreEqual("Foo $bar", php);
         }

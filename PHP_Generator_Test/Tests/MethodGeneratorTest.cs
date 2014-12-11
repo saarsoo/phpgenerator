@@ -37,7 +37,10 @@ namespace PHP_Generator_Test.Tests
         {
             _parameterGenerator.Results = new[] { "$bar" };
 
-            var php = _generator.Generate(new Method("foo", new[] { new Parameter("bar") }));
+            var php = _generator.Generate(new Method("foo")
+            {
+                Parameters = new[] { new Parameter("bar") }
+            });
 
             Assert.AreEqual("private function foo($bar){}", php);
         }
@@ -49,7 +52,10 @@ namespace PHP_Generator_Test.Tests
 
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
 
-            var php = _generator.Generate(new Method("foo", assignment));
+            var php = _generator.Generate(new Method("foo")
+            {
+                Body = assignment
+            });
 
             Assert.AreEqual("private function foo(){$foo=\"bar\";}", php);
         }
@@ -62,7 +68,10 @@ namespace PHP_Generator_Test.Tests
             var assignment = new Assignment(new Identifier("foo"), new Constant("bar"));
             var block = new Block(new[] { assignment });
 
-            var php = _generator.Generate(new Method("foo", block));
+            var php = _generator.Generate(new Method("foo")
+            {
+                Body = block
+            });
 
             Assert.AreEqual("private function foo(){$foo=\"bar\";}", php);
         }
@@ -72,7 +81,7 @@ namespace PHP_Generator_Test.Tests
         {
             _modifierGenerator.Results = new[] { "public" };
 
-            var php = _generator.Generate(new Method(Modifier.Public, "foobar"));
+            var php = _generator.Generate(new Method("foobar") { Modifier = Modifier.Public });
 
             Assert.AreEqual("public function foobar(){}", php);
         }

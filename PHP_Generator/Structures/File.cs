@@ -2,40 +2,14 @@
 {
     public class File
     {
-        public readonly Class[] Classes = { };
-        public readonly string Namespace;
-        public readonly Reference[] References = { };
+        public string Namespace { get; set; }
+        public Reference[] References { get; set; }
+        public Class[] Classes { get; set; }
 
         public File()
         {
-        }
-
-        public File(string @namespace)
-        {
-            Namespace = @namespace;
-        }
-
-        public File(Class[] @classes)
-        {
-            Classes = @classes;
-        }
-
-        public File(Reference[] references)
-        {
-            References = references;
-        }
-
-        public File(string @namespace, Class[] @classes)
-        {
-            Namespace = @namespace;
-            Classes = @classes;
-        }
-
-        public File(string @namespace, Reference[] references, Class[] @classes)
-        {
-            Namespace = @namespace;
-            References = references;
-            Classes = @classes;
+            References = new Reference[] { };
+            Classes = new Class[] { };
         }
     }
 }

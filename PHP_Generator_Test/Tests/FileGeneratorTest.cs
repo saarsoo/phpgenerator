@@ -31,7 +31,10 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateNamespace()
         {
-            var php = _generator.Generate(new File(@"foo\bar"));
+            var php = _generator.Generate(new File
+            {
+                Namespace = @"foo\bar"
+            });
 
             Assert.AreEqual(@"<?php namespace foo\bar;", php);
         }
@@ -41,7 +44,10 @@ namespace PHP_Generator_Test.Tests
         {
             _referenceGenerator.Results = new[] { @"use foo\bar;", @"use bar\foo;" };
 
-            var php = _generator.Generate(new File(new[] { new Reference(@"foo\bar"), new Reference(@"bar\foo") }));
+            var php = _generator.Generate(new File
+            {
+                References = new[] { new Reference(@"foo\bar"), new Reference(@"bar\foo") }
+            });
 
             Assert.AreEqual(@"<?php use foo\bar;use bar\foo;", php);
         }
@@ -51,7 +57,10 @@ namespace PHP_Generator_Test.Tests
         {
             _classGenerator.Results = new[] { "class foo{}" };
 
-            var php = _generator.Generate(new File(new[] { new Class("Foo") }));
+            var php = _generator.Generate(new File
+            {
+                Classes = new[] { new Class("Foo") }
+            });
 
             Assert.AreEqual("<?php class foo{}", php);
         }
@@ -64,11 +73,19 @@ namespace PHP_Generator_Test.Tests
             var references = new[] { new Reference(@"first\reference"), new Reference(@"second\reference") };
             var assignment = new Assignment(new Identifier("localName"), new Constant("value"));
             var block = new Block(new IStatement[] { assignment });
-            var method = new Method("methodName", block);
+            var method = new Method("methodName") { Body = block };
             var property = new Property("propertyName");
-            var @class = new Class("className", new IMember[] { property, method });
+            var @class = new Class("className")
+            {
+                Members = new IMember[] { property, method }
+            };
 
-            var file = new File(@"name\space", references, new[] { @class });
+            var file = new File
+            {
+                Namespace = @"name\space",
+                References = references,
+                Classes = new[] { @class }
+            };
 
             var php = _generator.Generate(file);
 

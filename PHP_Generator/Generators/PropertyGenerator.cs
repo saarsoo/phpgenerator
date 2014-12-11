@@ -25,9 +25,9 @@ namespace PHP_Generator.Generators
 
             var code = String.Format("{0} ${1}", modifier, property.Name);
 
-            if (property.Statement != null)
+            if (property.DefaultValue != null)
             {
-                code += "=" + _statementGenerator.Generate(property.Statement);
+                code += "=" + _statementGenerator.Generate(property.DefaultValue);
             }
 
             return code + ";";

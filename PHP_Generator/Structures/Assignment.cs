@@ -2,8 +2,8 @@
 {
     public class Assignment : IStatement
     {
-        public readonly IStatement From;
-        public readonly IStatement To;
+        public IStatement From { get; set; }
+        public IStatement To { get; set; }
 
         public Assignment(IStatement @from, IStatement to)
         {

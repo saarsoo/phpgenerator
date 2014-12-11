@@ -35,7 +35,10 @@ namespace PHP_Generator_Test.Tests
         {
             _statementGenerator.Results = new[] {"\"bar\""};
 
-            var php = _generator.Generate(new Property("foo", new Constant("bar")));
+            var php = _generator.Generate(new Property("foo")
+            {
+                DefaultValue = new Constant("bar")
+            });
 
             Assert.AreEqual("private $foo=\"bar\";", php);
         }

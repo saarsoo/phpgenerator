@@ -2,9 +2,9 @@
 {
     public class Arithmetic : IStatement
     {
-        public readonly IStatement LeftStatement;
-        public readonly ArithmeticOperator Operator;
-        public readonly IStatement RightStatement;
+        public IStatement LeftStatement { get; set; }
+        public ArithmeticOperator Operator { get; set; }
+        public IStatement RightStatement { get; set; }
 
         public Arithmetic(IStatement leftStatement, ArithmeticOperator @operator, IStatement rightStatement)
         {

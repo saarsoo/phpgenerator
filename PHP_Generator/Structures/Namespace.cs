@@ -2,7 +2,7 @@
 {
     public class Namespace
     {
-        public readonly string Path;
+        public string Path { get; set; }
 
         public Namespace(string path)
         {

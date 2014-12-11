@@ -2,8 +2,8 @@
 {
     public class Identifier : IStatement
     {
-        public readonly string Name;
-        public readonly bool Accessed;
+        public string Name { get; set; }
+        public bool Accessed { get; set; }
 
         public Identifier(string name, bool accessed = false)
         {

@@ -2,32 +2,13 @@
 {
     public class Parameter
     {
-        public readonly string Type;
-        public readonly string Name;
-        public readonly IStatement Statement;
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public IStatement DefaultValue { get; set; }
 
         public Parameter(string name)
         {
             Name = name;
-        }
-
-        public Parameter(string name, IStatement statement)
-        {
-            Name = name;
-            Statement = statement;
-        }
-
-        public Parameter(string type, string name)
-        {
-            Type = type;
-            Name = name;
-        }
-
-        public Parameter(string type, string name, IStatement statement)
-        {
-            Type = type;
-            Name = name;
-            Statement = statement;
         }
     }
 }

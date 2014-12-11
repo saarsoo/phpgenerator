@@ -2,8 +2,8 @@
 {
     public enum Modifier
     {
+        Private,
         Public,
-        Protected,
-        Private
+        Protected
     }
 }

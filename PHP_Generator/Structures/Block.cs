@@ -2,7 +2,12 @@
 {
     public class Block : IStatement
     {
-        public readonly IStatement[] Statements;
+        public IStatement[] Statements { get; set; }
+
+        public Block()
+        {
+            Statements = new IStatement[] { };
+        }
 
         public Block(IStatement[] statements)
         {

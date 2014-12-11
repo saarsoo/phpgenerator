@@ -2,9 +2,9 @@
 {
     public class IfStatement : IStatement
     {
-        public readonly IStatement Condition;
-        public readonly IStatement FalseBody;
-        public readonly IStatement TrueBody;
+        public IStatement Condition { get; set; }
+        public IStatement FalseBody { get; set; }
+        public IStatement TrueBody { get; set; }
 
         public IfStatement(IStatement condition, IStatement trueBody)
         {
