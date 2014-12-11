@@ -21,6 +21,8 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateEmptyMethod()
         {
+            _statementGenerator.Results = new[] { "foo" };
+
             var php = _generator.Generate(new MethodCall("foo"));
 
             Assert.AreEqual("foo()", php);
@@ -29,7 +31,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateWithArgument()
         {
-            _statementGenerator.Results = new[] { "\"bar\"" };
+            _statementGenerator.Results = new[] { "foo", "\"bar\"" };
 
             var php = _generator.Generate(new MethodCall("foo")
             {
@@ -42,7 +44,7 @@ namespace PHP_Generator_Test.Tests
         [TestMethod]
         public void TestGenerateWithArguments()
         {
-            _statementGenerator.Results = new[] { "$foo", "\"bar\"" };
+            _statementGenerator.Results = new[] { "foobus", "$foo", "\"bar\"" };
 
             var php = _generator.Generate(new MethodCall("foobus")
             {

@@ -10,7 +10,7 @@ namespace PHP_Generator.Generators
 
         public string Generate(MethodCall methodCall)
         {
-            var name = methodCall.Name;
+            var from = _statementGenerator.Generate(methodCall.From);
 
             var arguments = new List<string>();
 
@@ -19,7 +19,7 @@ namespace PHP_Generator.Generators
                 arguments.Add(_statementGenerator.Generate(argument));
             }
 
-            return String.Format("{0}({1})", name, String.Join(",", arguments));
+            return String.Format("{0}({1})", from, String.Join(",", arguments));
         }
 
         public void InjectDependency(IStatementGenerator dependency)
